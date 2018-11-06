@@ -1,0 +1,414 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[usenames]{color}
+% For references layout
+\usepackage{natbib}
+% To make index at the end
+\usepackage{makeidx}
+\makeindex
+
+% side margin
+\oddsidemargin 0mm
+\evensidemargin 0mm
+
+% vertical dimension
+%\topmargin 0pt 
+\addtolength{\topmargin}{-27mm}
+\addtolength{\textheight}{50mm} %{68pt}
+
+% text width
+\textwidth 160mm
+
+% indent
+\setlength{\parindent}{0mm}
+
+% How many levels of subdirectories should be allowed
+\setcounter{secnumdepth}{5}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setting up some short commands
+% Line commands
+\newcommand{\HRule}{\rule{\linewidth}{1mm}}
+\newcommand{\VRule}{\rule{1mm}{60mm}}
+\newcommand{\strek}{\rule{\linewidth}{0.1mm}}
+\newcommand{\TynnRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\MidtStrek}{\rule[0.8mm]{6mm}{0.1mm}}
+% Bullet command
+\newcommand{\bul}{$\bullet$\ }
+% Tab command
+\newcommand{\atab}{\hspace*{5mm}}
+
+% Commands for names/text
+\newcommand{\model}{Oslo CTM3}
+\newcommand{\oldmodel}{Oslo CTM2}
+\newcommand{\pmain}{p-main}
+\newcommand{\ucimodel}{UCI CTM}
+\newcommand{\titan}{Titan III}
+\newcommand{\ocmail}{\texttt{oslo-ctm@geo.uio.no}}
+%\newcommand{\ocweb}{\texttt{http://www.geo.uio.no/metos/osloctm/}}
+\newcommand{\ocweb}{\texttt{http://folk.uio.no/asovde/osloctm3/}}
+% Commands for e.g. files and directories
+\newcommand{\pmainf}{{\it p-main.f}}
+\newcommand{\makefile}{{\it Makefile}}
+\newcommand{\params}{{\it params.h}}
+\newcommand{\paramsF}{{\it params.F}}
+\newcommand{\tracerlist}{{\it chch\_oc.d}}
+\newcommand{\scavlist}{{\it scavng55\_oc.d}}
+\newcommand{\maininput}{{\it LxxTyy.inp}}
+\newcommand{\diaginput}{{\it LxxTyy.inp}}
+\newcommand{\tracerinput}{{\it Ltracer\_oc.inp}}
+\newcommand{\emisfile}{{\it Ltracer\_emis.inp}}
+\newcommand{\avgsavfile}{{\it avgsavDDDDD}}
+\newcommand{\oslopath}{{\it OSLO}}
+\newcommand{\emispath}{{\it /data2/geo/EMIS}}
+\newcommand{\qcodepath}{{\it UCI\_Q56D}}
+\newcommand{\inptrctm}{{\it inptr.ctm}}
+\newcommand{\inputctm}{{\it input.ctm}}
+\newcommand{\pwind}{{\it p-wind\_ec.f}}
+\newcommand{\diagnosticsctm}{{\it diagnostics.ctm}}
+\newcommand{\qcodedir}{{\it UCI\_Q56D}}
+
+% New environments
+\newenvironment{itemize2} {
+\begin{itemize}\addtolength{\itemsep}{-0.5\baselineskip}\vspace*{-0.8\baselineskip}
+}{\end{itemize} }
+\newenvironment{description2} {
+\begin{description}\addtolength{\itemsep}{-0.6\baselineskip}
+}{\end{description} }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Set space between paragraphs (to avoid using \\)
+\setlength{\parskip}{3mm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% September 2008, Amund Sovde
+\twocolumn[\flushright
+{\bf \huge \model}\\
+\vspace*{3mm}
+{\bf \Large SVN instructions}\\
+\vspace*{3mm}
+{\bf \large Ole Amund S{\o}vde}\\
+{\bf Department of Geosciences}\\
+{\bf University of Oslo}\\
+{\bf \today}\\
+\vspace*{10mm}
+\bigskip
+]
+\small
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SVN -- Subversion -- #SVN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% July 2009, Amund Sovde
+\section{SVN -- Subversion}
+\label{app:svn}
+The \model\ is available through the UiO central subversion system
+(SVN)\footnote{http://www2.usit.uio.no/it/subversion/}\index{SVN}.
+To access the code you have to be member of the group
+\verb#gf-ozone#.
+
+SVN is a version control system, which replaces the old CVS version of
+\oldmodel. A good introduction is the SVN book, available at
+{\it http://svnbook.red-bean.com/}\index{SVN!manual}.
+
+To use SVN you need to have SVN installed/loaded. If it is available
+as a module, you can load it with
+\begin{verbatim}
+module load svn
+\end{verbatim}
+
+Important SVN commands are \verb#checkout#, \verb#add#,
+\verb#delete#/\verb#remove#, \verb#commit#, \verb#status#,
+\verb#diff#, \verb#resolve#.
+
+
+
+% Repository structure
+\subsection{Repository structure}
+\label{app:svn_repository}\index{get started!repository structure}
+Only the \model\ code, i.e. the \verb#trunk# of SVN, is described
+in this manual. But there are other tools available through SVN. The
+more important one is \verb#utilities#, and when you are experienced
+enough to use branches and tags, you have separate directories for them.
+\begin{verbatim}
+  trunk/       (Oslo CTM3 code)
+    MANUAL/    (this manual)
+    OSLO/      (Oslo chemistry code)
+      DEAD_COLUMN/ (Dust code)
+      DUMMIES/     (Dummy routines)
+      ROUTINES_NOT_USED/   (Old routines)
+    UCI_Q56D/  (original UCI code)
+    tables/    (tables)
+    tmp/       (for pathscale compilation)
+  branches/
+  tags/
+  utilities/
+    fortran/
+    idl/
+    matlab/
+  ctm2/            (old CTM2 code)
+\end{verbatim}
+
+
+% Checkout
+\subsection{Checkout}\index{SVN!checkout}
+\index{code!where is it?}\index{source code!where is it?}
+The \model\ code is located in a {\it repository}, and you get it by
+typing
+{\small
+\begin{verbatim}
+svn checkout \
+  svn+ssh://svn.uio.no/svnroot/osloctm3/trunk \
+  <name of dir to put the code>
+\end{verbatim}
+}
+The code is now available in your working directory. In the {\it .svn}
+directory the original revision files are also available.
+
+If you don't specify the name of directory where the code will be
+copied to, it will be named {\it trunk}.
+
+Similarly you can fetch the \verb#utilities# or any other directory,
+just swap ``trunk'' with the directory you want. For example, if you
+only want this manual, use \verb#trunk/MANUAL#.
+
+
+% Status
+\subsection{Status}\index{SVN!status}
+SVN can check your working directory files against the original
+revision of the repository. {\it It does not check the repository
+itself!} The status tells you whether the file has changed or not.
+{\small
+\begin{verbatim}
+svn status <file or path>
+\end{verbatim}
+}
+If a file is specified, only that file is checked. If a directory is
+specified (no specified path or file means current directory) all
+files in the directory are checked.
+
+The status returns a letter for each file specified:
+\begin{itemize2}
+  \item ? File does not exist in repository.
+  \item A File is scheduled for addition.
+  \item D File is scheduled for removal.
+  \item C File is in conflict with repository.
+  \item M File is locally modified.
+\end{itemize2}
+
+{\bf Important}\\
+The current version (i.e. the latest repositiory trunk) may have
+changed even though the file status reports the file to be unchanged.
+Adding an option to the command allows you to see which
+files that have newer versions in the repository (marked by \verb#*#):
+{\small
+\begin{verbatim}
+svn status -u <file or path>
+\end{verbatim}
+You can also add a verbose option \verb#-v#.
+}
+
+
+% Conflicts & resolve
+\subsection{Conflicts \& resolve}\index{SVN!conflicts}
+\index{SVN!conflicts!resolving}\index{SVN!resolve}
+Conflicts occur when you try to update your files, and SVN does not
+know how to implement your changes into the repository.
+This must then be {\it resolved} before you can
+commit the changes. Resolving can be carried out immediately or be
+postponed, which is usually the best way.
+
+When getting a conflict for a file, several files are generated, their
+file names being the original file name + an extension.
+\begin{itemize}
+  \item{.mine} Your working copy based on revision XX.
+  \item{.rXX} Revision which your working copy was based on.
+  \item{.rYY} The new file in the repository.
+\end{itemize}
+If you use svn older than version 1.5, you solve this by doing changes
+to the file and then type:
+{\small
+\begin{verbatim}
+svn resolved <file in conflict>
+\end{verbatim}
+}
+
+For version 1.5 and newer, the command is resolve, and it takes
+several options. You can decide to use your version
+{\small
+\begin{verbatim}
+svn resolve --accept mine-full \
+  <file in conflict>
+\end{verbatim}
+}
+This can also be done by manually correcting the conflicts in the
+file, followed by
+{\small
+\begin{verbatim}
+svn resolve --accept working \
+  <file in conflict>
+\end{verbatim}
+}
+Other possibilities are to accept the repository version (no changes
+will be committed)
+{\small
+\begin{verbatim}
+svn resolve --accept theirs-full \
+  <file in conflict>
+\end{verbatim}
+}
+For resolving conflicts, see Chapter 2 in the SVN book.
+
+
+% Adding a file
+\subsection{Adding a file}\index{SVN!add file}
+When adding a new file you must first
+{\small
+\begin{verbatim}
+svn add <the new file>
+\end{verbatim}
+}
+which schedules the file for the repository, then you can commit the
+file:
+{\small
+\begin{verbatim}
+svn commit <the new file>
+\end{verbatim}
+}
+
+
+% Deleting a file
+\subsection{Deleting a file}\index{SVN!delete file}
+If you want to delete a file, simply use the \verb#delete# or
+\verb#remove# commands, e.g.
+{\small
+\begin{verbatim}
+svn delete <remove-file>
+\end{verbatim}
+}
+which schedules the file for removal, and also removes your local
+copy, so it is ready for committing:
+{\small
+\begin{verbatim}
+svn commit <remove-file>
+\end{verbatim}
+}
+
+You can delete directories in the same way. In that case, however, the
+local directory is not removed until you commit the changes.
+
+
+% Commiting changes
+\subsection{Commiting changes}\index{SVN!commit changes}
+Not everybody should be allowed to commit changes. A moderator should
+approve your work before it is committed.
+
+When it has been agreed that your modified files are to be included to
+the repository, you first need to make sure the file is otherwise
+updated:
+{\small
+\begin{verbatim}
+svn update
+\end{verbatim}
+}
+Then you can commit the changes, unless there are conflicts;
+{\small
+\begin{verbatim}
+svn commit -m ``msg''
+\end{verbatim}
+}
+where ``msg'' is a message to tag the changes. Instead of a message
+you can send in a file where you describe the changes. This is done by
+\verb#-F <filename># instead of \verb#-m ``msg''#.
+
+If you only want to commit some of the changed files, use
+{\small
+\begin{verbatim}
+svn commit <files to commit> -m ``msg''
+\end{verbatim}
+}
+
+
+
+% Diff
+\subsection{Diff}\index{SVN!diff}
+Diff will give you the differences between your working copy and the
+revision of the repository it is updated to, i.e. what is located in
+the {\it .svn} directory. It does not check the repository!
+
+If you want to compare with other revisions, use the option
+\verb#-r revision_number#; this will check the repository. The
+\verb#revision number# can take several forms, which you find in
+Chapter 3 of the SVN book. The useful revision is usually the latest,
+and the best solution for this is probably:
+\begin{verbatim}
+  svn diff -r {date} <file>
+\end{verbatim}
+where \verb#date# may be e.g. \verb#YYYY-MM-DD# or \verb#HH:MM#.
+
+See Chapter 2 in the SVN book for more.
+
+
+% Log
+\subsection{Log}\index{SVN!log}
+The changes you specify with \verb#-m# when you commit will be stored
+in a log. You access the log by
+\begin{verbatim}
+  svn log
+\end{verbatim}
+to get all changes reported, or by 
+\begin{verbatim}
+  svn log <file>
+\end{verbatim}
+to get changes for a specific file.
+
+
+% Help
+\subsection{Help}\index{SVN!help}
+You find out more about the SVN commands by typing
+\begin{verbatim}
+  svn help <command>
+\end{verbatim}
+
+
+% Braching
+\subsection{Branching}\index{SVN!branching}
+When you start working on a large modification to the \model, it is
+wise to create a {\it branch} containing your code. SVN will keep
+track of your files as before, but it will not affect the trunk --
+only the branch.
+Later, when the branch is working well, the branch may be merged into
+the trunk.
+
+Read Chapter 4 in the SVN book to find out more on this.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

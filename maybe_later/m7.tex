@@ -1,0 +1,275 @@
+%\index{M7!history}
+The documented aerosol modules (Sulphate, BCOC, DUST, SALT) produce
+aerosols independent of each other. Nitrate is somewhat special since
+it depends on SALT and sulphate, and sulphate depends on the
+tropospheric chemistry.
+
+M7 tries to put the aerosol packages together. The inclusion of M7
+builds on this approach in the following way:
+\begin{enumerate}
+  \item All the separate modules are left untouched.
+  \item If M7 is activated the emissions of the components which 
+    are concerned by M7 are transferred to a new array and the 
+    original emission arrays become irrelevant.
+  \item All the M7 tracers have their own loss terms depending
+    on the microphysics.
+\end{enumerate}
+
+You turn on the M7 application by setting \verb#M7 := Y# in
+\makefile. Running the aerosol modules separately is of coarse good if
+you want to save CPU time and only want to run 8 carbon tracers
+instead of full chemistry/sulfate/M7 run.
+
+
+% Physics
+\subsection{Physics}
+\index{M7!physics}
+M7 is a microphysical model. This means that it's purpose is to
+calculate interaction between different types of aerosols. The output
+is the size of the aerosols and their mixing state (i.e. water soluble
+or insoluble). M7 splits the aerosol size distribution into the
+following size distributed modes
+\begin{itemize2}
+  \item Nucleation mode, water soluble, size: $\sim 1 nm$
+  \item Aitken mode, water soluble,  size: $\sim 0.01 {\mu}m$
+  \item Accumulation mode, water soluble, size: $\sim 0.1 {\mu}m$
+  \item Coarse mode, water soluble, size: $\sim 1 {\mu}m$
+  \item Aitken mode, insoluble,  size: $\sim 0.01 {\mu}m$
+  \item Accumulation insoluble, size: $\sim 0.1 {\mu}m$
+  \item Coarse mode, insoluble, size: $\sim 1 {\mu}m$
+\end{itemize2}
+
+{\bf Important}\\
+{\bf M7 does not treat semivolatile aerosol species} like nitrate or
+secondary organics. This is both a good thing and a bad thing. It is
+good because it greatly  reduces the complexity of the problem, and it
+is bad because.. well... you can not calculate the effect these
+tracers would have on aerosol microphysics.
+
+% M7 tracers
+\subsection{M7 tracers}
+\index{M7!tracers}
+The M7 tracers are listed in Table \ref{tbl:m7tracers}.
+
+\begin{table*}
+\caption{Tracers included in the M7 model. All the aerosol species
+  (250--274) have lifetimes of days-weeks and they all need to be
+  transported. Water species (275--278) are in equilibrium (see below)
+  and should not be transported. Soluble species (except water) are
+  washed out in convection. There are 17 soluble species in M7.}
+\label{tbl:m7tracers}
+\begin{minipage}{\linewidth}
+\begin{tabular}{|c|l|l|c|c|}
+\hline
+Nr  & Component name & Remarks                 & Soluble   &  Transport \\
+\hline \hline
+80  & SO4GAS     &  Gas phase sulf. acid       &  N/A (No) & No\\
+\hline
+250 & SO4NUC     &    nucleation mode sulphate &  Yes      &  Yes\\
+\hline
+251 & SO4AT      &    aitken mode sulphate     &  Yes      &  Yes\\
+\hline
+252 & SO4AC      &    accumulation mode sulphate &  Yes    &  Yes\\
+\hline
+253 & SO4CRS     &    coarse mode sulphate  &  Yes       &  Yes\\
+\hline
+254 & BCKS       &  aitken mode soluble BC  &  Yes       &  Yes\\
+\hline
+255 & BCAS       &    accumulation mode BC  &  Yes       &  Yes\\
+\hline
+256 & BCCS       &    coarse mode BC        &  Yes       &  Yes\\
+\hline
+257 & BCKI       &    aitken mode BC        &  No        &  Yes\\
+\hline
+258 & OCKS       &    aitken mode OC        &  Yes       &  Yes\\
+\hline
+259 & OCAS       &    accumulation mode OC  &  Yes       &  Yes\\
+\hline
+260 & OCCS       &    coarse mode OC        &  Yes       &  Yes\\
+\hline
+261 & OCKI       &    aitken mode OC        &  No        &  Yes\\
+\hline
+262 & SSAS       & accumulation mode Seasalt &  Yes      &  Yes\\
+\hline
+263 & SSCS       &  coarse mode seasalt      &  Yes      &  Yes\\
+\hline
+264 & DUAS       &    accumulation mode dust  &  Yes     &  Yes\\
+\hline
+265 & DUCS       &    coarse mode dust        &  Yes     &  Yes\\
+\hline
+266 & DUAI       &    accumulation mode dust  &  No      &  Yes\\
+\hline
+267 & DUCI       &   coarse mode dust        &  No       &  Yes\\
+\hline
+268 & NNUC       &    Nucleation mode number &  Yes      &  Yes\\
+\hline
+269 & NKS        &    Aitken mode number      &  Yes     &  Yes\\
+\hline
+270 & NAS        &    Accumulation mode number  &  Yes   &  Yes\\
+\hline 
+271 & NCS        &   coarse mode number        &  Yes    &  Yes\\
+\hline
+272 & NKI        &   aikten mode number      &  No       &  Yes\\
+\hline
+273 & NAI        &    accumulation mode number  &  No    &  Yes\\
+\hline
+274 & NCI        &   Coarse mode number         & No     &  Yes\\
+\hline
+275 & H2ONUC     &   nucleation mode water      &  Yes   &  No\\
+\hline
+276 & H2OKS      &  aitken mode water           &  Yes   &  No \\
+\hline
+277 & H2OAS      &  accumulation mode water     & Yes    &  No\\
+\hline
+278 & H2OCS      &  coarse mode water           & Yes    &  No \\
+\hline
+\end{tabular}
+\end{minipage}
+\end{table*}
+
+Thus, when running M7, you need 51 tracers from tropospheric
+chemistry, 7 from sulfate and one extra (\verb#SO4GAS#), and further
+you need the 8 BC/OC species, which are not transported or washed
+out. The tracers washed out in convection are all the
+water-soluble. Table \ref{tbl:tracerm7} shows in more detail the
+tracers need for running M7.
+
+\begin{table}
+\caption{Explanation of the number of tracers needed for running
+  M7. Note that several tracers are dummy tracers (the 8 of BCOC, the
+  2 of dust, the 2 of salt). These tracers are handled by the 25 M7
+  tracers when running M7. The sulphate species are converted
+  immediately to M7 species. The number in parenthesis for
+  Transport indicates the  number of tracers if you exclude the
+  tracers labeled \textcolor{red}{\it Maybe} in Table
+  \ref{tbl:tropcomp}.}
+ \label{tbl:tracerm7}
+\begin{minipage}{\linewidth}
+\begin{tabular}{|l|c|c|c|}
+\hline
+Application      & Tracers  & Transport  & Washout \\
+\hline
+TROPCHEM         &  51      &  40 (35)   &  8 \\
+\hline
+SALT             &  2\footnote{dummy tracers} &  0   &  0 \\
+\hline
+DUST             &  2\footnote{dummy tracers} &  0   &  0 \\
+\hline
+SULPHATE\footnote{no transport or washout of old $SO_4$} 
+                 & 7        &  4          &  3 \\  
+\hline
+SO4GAS           &  1       &  0          &  0 \\
+\hline
+BCOC             &  8\footnote{dummy tracers}  &  0   &  0 \\
+\hline
+M7               &  25      &  25         &  17 \\
+\hline
+M7(water)        &  4       &  0          &  0 \\
+\hline
+\hline
+SUM              & 100      &  69 (64)    &  28 \\
+\hline
+\end{tabular}
+\end{minipage}
+\end{table}
+
+
+\subsection{Technical information}
+\index{M7!technical information}
+
+The M7 model is activated by the logical switch LM7. This logical
+variable currently has to be set in the main program. When this
+logical switch is activated, the emissions calculated for the
+M7-relevant components are removed from the \verb#POLLX# array and put
+in the \verb#PRODM7# array. 
+
+The idea is that the old aerosols tracers still exist in the
+model. However, they are in a way irrelevant if M7 is used and there
+is no need for transporting them.
+
+
+\subsection{Interaction with other parts of aerosol codes}
+\index{M7!aerosol code interaction}
+
+\subsubsection{Carbon particles}
+\index{M7!carbon particles}
+The carbon particles in their old form should not be transported if M7
+is used. However, they should be included as tracers in the \inptrctm\
+file.
+
+If the logical LM7 is recognized by the model, the emissions of BC
+and OC are put into the \verb#prodm7# array and enters the M7 tracer
+list. They are not put into the places they have as BC/OC tracers as
+described in section \ref{sxn:bcoc}.
+
+\subsubsection{Sulphate model}
+\index{M7!sulphate model}
+M7 needs explicit input about how much sulphate is formed in gas phase
+and how much is formed in the aqueous phase. Therefore, another
+tracer, number 80, \verb#SO4gas# is used when M7 is used.
+The tracer which represents sulphate in the sulphate application (see
+chapter \ref{sxn:sulphate}) which is tracer number 73 is only
+representing aqueous phase sulphate when M7 is used.
+
+There is no need for transporting the sulphate tracers since the mass
+produced in the sulphate tracers are moved to the M7-tracers in the
+same timestep. These tracers are later the ones being transported and
+being lost by dry- and wet deposition.
+
+\subsubsection{Dust and Seasalt models}
+\index{M7!dust and seasalt models}
+
+The dust and seasalt models are activated when it finds tracers
+named \verb#SALTXX# or \verb#DUSTXX# (where \verb#XX# is bin number)
+in the standard version (see more description in section
+\ref{sxn:dust} and \ref{sxn:salt}. To not re-organize the code too
+much, this feature is kept, and you still need tracers called
+\verb#DUST01# and \verb#SALT01# to be able to run these modules.
+
+However, when running M7, the standard versions of these codes are
+no longer relevant. Therefore, you need 2 dust species and 2 salt
+species to activate the model. These species have to be listed in
+\inptrctm\ {\bf but they do not need to be transported}.
+
+\subsubsection{Salt model}
+\label{sxn:salt2m7}\index{M7!seasalt model}
+
+The logical variable LM7 is sent directly into the salt model.
+If the salt model recognizes this variable as TRUE, it will
+not care about fall speeds and dry deposition, but only output
+the emissions into the \verb#prodm7# array.
+
+In the case of LM7 being true in the seasalt application, a production
+routine giving modal emissions are being activated. This is different
+from the standard model in the way that in the standard model,
+the production routines distributes the production to size bins.
+
+\subsubsection{Dust model}
+\index{M7!dust model}
+
+When using M7, the whole DUST model (DEAD) is still run. This is 
+strictly not necessary since M7 does not really care about what
+happens in DEAD except for one thing: It wants the emissions.
+
+It would have been possible to send the logical LM7 to the dust model 
+and only output the emissions if M7 is used, and not call the
+deposition routines in a similar way to what is done for the salt
+model (section \ref{sxn:salt2m7}. However: In the case of dust, 
+the complete call to DEAD  kept because of the following reasons
+\begin{itemize}
+  \item The dust code is more complicated than the salt code and
+    sending around the logical LM7 in it could be messy.
+  \item DEAD is not developed at UiO, and if anyone wants to upgrade
+    to a more recent version of DEAD, it would be easier not having to
+    re-code it using the variable LM7 also.
+\end{itemize}
+
+The code to DEAD will update the concentrations of the tracer
+\verb#DUST01# which should not transported in CTM2. However, DEAD also
+puts the emissions in a 2D field which can be accessed with the
+subroutine \verb#dustfield2main#.
+
+All that is needed to include dust in M7 is the call to
+\verb#dustfield2main# and fetch the emissions. These are then
+processed in the \verb#prodm7# variable.
+

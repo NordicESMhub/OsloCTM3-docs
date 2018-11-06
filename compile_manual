@@ -1,0 +1,11 @@
+# standard
+latex manual_osloctm3
+bibtex manual_osloctm3
+latex manual_osloctm3
+makeindex manual_osloctm3
+latex manual_osloctm3
+pdflatex -shell-escape manual_osloctm3.tex
+
+# Old not searchable
+#dvips -t a4 manual_osloctm3.dvi -o manual_osloctm3.ps
+#ps2pdf manual_osloctm3.ps 

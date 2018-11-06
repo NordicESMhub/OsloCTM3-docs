@@ -1,0 +1,95 @@
+SO2+O3 -aq->
+
+ OH + DMS -> H2O + CH3SCH2
+OH + DMS -> 0.75 SO2 + 0.25 MSA
+OH + H2S + O2 -> SO2 + H2O
+
+OH + SO2 -> H2SO4
+
+HO2NO2+HSO3->HNO3+SO4 (through SO2 in aq)
+
+
+
+
+       if (LSULPHUR) LOSS = LOSS + CAQ1572*M_SO2
+
+          if (LSULPHUR) LOSS_2 = LOSS_2 + C4071a*M_DMS + C4071b*M_DMS
+     &                           + C4074*M_H2S  + CTOT4072*M_SO2
+
+
+
+          if (LSULPHUR) then
+C..DMS--v
+             PROD = POLLX(71)
+             LOSS = C4147*M_NO3 + C4071a*M_OH + C4071b*M_OH
+
+             CALL QSSA (45,'DMS',DTCH,QLIN,ST,PROD,LOSS,ZC(71,L))
+C..DMS--^
+
+C..SO2--v
+             PROD = C4071a*M_OH*M_DMS + 0.75*C4071b*M_OH*M_DMS + 
+     &            C4147*M_NO3*M_DMS + C4074*M_OH*M_H2S + 
+     &            POLLX(72)
+             LOSS = CTOT4072*M_OH + ! gas phase
+     &            CAQ1572*H2O2 + CAQ1772*M_HO2NO2 + CAQ0172*M_O3 ! aq. phase
+     &            + DEPSO2          ! dry dep.
+     &            + CCATSO2         ! catalytic
+     &            + WETDEPSO2       ! sub cloud scav.
+
+             CALL QSSA (46,'SO2',DTCH,QLIN,ST,PROD,LOSS,ZC(72,L))
+C..SO2--^
+
+
+             IF(.NOT.LM7)THEN
+C..SO4--v
+                PROD = (CTOT4072*M_OH + 
+     &               CAQ1572*H2O2 + CAQ1772*M_HO2NO2 + CAQ0172*M_O3
+     &               + CCATSO2) * M_SO2
+     &               + POLLX(73)
+                LOSS = DEPSO4  + WETDEPSO4 ! sub cloud scav., wet dep in subr. rainout
+     
+                CALL QSSA (47,'SO4',DTCH,QLIN,ST,PROD,LOSS,ZC(73,L))
+
+             ELSE               !Using M7
+                !// M7 splits gaseous and aquous SO4
+                !// Gaseous SO4
+                PROD = CTOT4072*M_OH*M_SO2  
+                !CHEMPROD(I,80) = PROD
+                LOSS = 0.d0
+
+                CALL QSSA (47,'SO4Gas',DTCH,QLIN,ST,PROD,LOSS,ZC(80,L))
+
+                !// Aquous SO4
+                PROD =
+     &               (CAQ1572*H2O2 + CAQ1772*M_HO2NO2 + CAQ0172*M_O3
+     &               + CCATSO2) * M_SO2
+C++in prodlossm7     &            + POLLX(73)
+                !CHEMPROD(I,73)=PROD
+                LOSS = 0.d0
+C             LOSS = DEPSO4  + WETDEPSO4 ! sub cloud scav., wet dep in subr. rainout
+             
+                CALL QSSA (47,'SO4AQ',DTCH,QLIN,ST,PROD,LOSS,ZC(73,L))
+
+             ENDIF              !Check on M7
+C..SO4--^
+
+C..H2S--v
+             PROD = POLLX(74)
+             LOSS = C4074*M_OH
+             CALL QSSA (48,'H2S',DTCH,QLIN,ST,PROD,LOSS,ZC(74,L))
+C..H2S--^
+
+
+C..MSA--v
+             PROD = 0.25*C4071b*M_OH*M_DMS
+             LOSS = DEPMSA      ! wet deposition in subr. rainout
+             CALL QSSA (49,'MSA',DTCH,QLIN,ST,PROD,LOSS,ZC(75,L))
+C..MSA--^
+
+
+CC..OCS--v
+Cc          LOSS = C3877*RO3P_MGdm
+Cc          PROD = 0.d0
+Cc          CALL QSSA (50,'OCS',DTCH,QLIN,ST,PROD,LOSS,ZC(77,L))
+CC..OCS--^
+          endif !// if (LSULPHUR) then

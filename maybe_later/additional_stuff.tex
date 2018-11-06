@@ -1,0 +1,85 @@
+% Speeding up the sub-stepping loop
+\subsection{Speeding up the sub-stepping loop}
+\label{app:substepping_faster}\index{sub-stepping loop!faster?}
+The original solution by UCI is to loop through \verb#NLCM# and check
+whether advection or chemistry and boundary layer mixing should be
+done.
+
+If it is necessary to have e.g. \verb#NRCH=4#, the following approach
+should be considered to save the number of times going in and out of
+parallel blocks. It is slightly different from the LCM approach, as
+will be explained.
+
+Realizing that advection controls the choice of parallelization, let
+the sub-stepping \verb#NSUB# loop through the global advection steps
+(\verb#NADV#). For each \verb#NSUB# step the number of {\it chemical}
+sub-steps per advection step (\verb#NSSPADV#) can be calculated
+(number of chemistry and boundary layer mixing steps during this
+\verb#NSUB#).
+This is outlined in Table \ref{tbl:nsubmsub}.
+\begin{table}[t!]
+  \caption{Overview of the operator split loop with two sub-stepping
+    loops.}
+  \label{tbl:nsubmsub}
+\begin{minipage}{\linewidth}
+\strek
+\vspace{-1mm}
+\begin{verbatim}
+   !// OPERATOR SPLIT LOOP
+   do NOPS = 1,NROPSM
+
+     do NSUB=1,NADV
+
+       <calculate NSSPADV>
+       <into parallel IJ-block>
+       do MSUB=1,NSSPADV
+         <boundary layer mixing>
+         <chemistry>
+       end do
+       <convection>
+       <w-advection>
+       <end parallel IJ-block>
+       <into parallel layers>
+       <uv-advection>
+       <end parallel layers>
+
+     end do
+
+   end do
+\end{verbatim}
+\vspace{-4mm}\strek
+\end{minipage}
+\end{table}
+
+The processes carried out per \verb#NSUB# will then have time step
+\verb#DTADV# while the ones in \verb#MSUB#\index{MSUB} have time step
+\verb#DTCHM#.
+
+For Example 1 in Table \ref{tbl:substepping}, \verb#NSUB# loops once,
+but \verb#MSUB# loops four times.
+An obvious difference from the UCI approach is that now the sequence
+is C/C/C/C/A instead of C/A/C/C/C, since the 
+In other words are the sequence shifted slightly, and this should be
+of minor importance.
+
+In Example 2, the sub-steps are
+\begin{verbatim}
+  NSUB  MSUB
+   1     2
+   2     1
+   3     1
+\end{verbatim}
+so the new sequence is C/C/A/C/A/C/A, where the UCI method gives
+C/A/C/A/C/A/C. Again we see a shift, which should be of minor
+importance.
+
+As a rather unrealistic example (at least for T42 horizontal
+resolution), \verb#NADV=5# and \verb#NRCHEM=4# would result in
+\begin{verbatim}
+  NSUB  MSUB
+   1     1
+   2     1
+   3     1
+   4     1
+   5     0
+\end{verbatim}
