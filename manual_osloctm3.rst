@@ -270,9 +270,8 @@ edges of the box:
 
 .. math::
 
-   \begin{aligned}
      p_c(L) &=& \frac{1}{2}\left[\eta_a(L) + \eta_a(L+1)\right. \nonumber\\
-                   && +\left.(\eta_b(L)+\eta_b(L+1))*p_s\right]\end{aligned}
+                   && +\left.(\eta_b(L)+\eta_b(L+1))*p_s\right]
 
  The height of grid box bottoms are given by the array
 ``ZOFLE(LPAR+1,IPAR,JPAR)``. Surface values of this variable act as
@@ -288,9 +287,8 @@ and pressure at grid box edges (:math:`p_b`).
 
 .. math::
 
-   \begin{aligned}
      \Delta Z(L) &=& -29.27 T(L)\left[1-0.6q(L)\right] \nonumber \\
-              && \cdot \log\left(\frac{p_b(L+1)}{p_b(L)}\right)\end{aligned}
+              && \cdot \log\left(\frac{p_b(L+1)}{p_b(L)}\right)
 
  Although :math:`Z_s` is the topography in meters, this quantity is
 mainly used for diagnostics. Physical processes generally use ``ZOFLE``
@@ -2148,10 +2146,9 @@ molecular weights of the tracer (:math:`M_t`) and air (:math:`M_a`):
 
 .. math::
 
-   \begin{aligned}
      mmr &=& \frac{m_t}{m_a} = \frac{n_t M_t}{n_a M_a}\nonumber\\
          &=& vmr \times \frac{M_t}{M_a}
-     \label{vmr2mmr}\end{aligned}
+     \label{vmr2mmr}
 
  In other words: multiply volume mixing ratio by ``TMOLMIX2MASSMIX`` (or
 ``XTMOLMIX2MASSMIX`` for non-transported tracers).
@@ -2180,18 +2177,16 @@ and ([mass2vmr]):
 
 .. math::
 
-   \begin{aligned}
      vmr &=& c_t\frac{10^3 M_a V}{m_a N_A}\nonumber\\
-         &=& \frac{c_t}{c_a}\end{aligned}
+         &=& \frac{c_t}{c_a}
 
 Back to concentration:
 
 .. math::
 
-   \begin{aligned}
      c_t &=& vmr \frac{10^{-3}m_a N_A}{M_a V}\nonumber\\
          &=& vmr \times c_a
-     \label{vmr2conc}\end{aligned}
+     \label{vmr2conc}
 
 Keep  clean
 -----------
@@ -3019,9 +3014,8 @@ the solution is
 
 .. math::
 
-   \begin{aligned}
      n_{aq} &=& C_{aq}  V_{elevator\_solvent}\label{eq:n_aq}\\
-            &&  \cdot10^3\textrm{L(solvent)/m}^3\textrm{(solvent)}\nonumber\end{aligned}
+            &&  \cdot10^3\textrm{L(solvent)/m}^3\textrm{(solvent)}\nonumber
 
 As already explained, the solvent is liquid water. The volume of the
 solvent is given by the liquid water content, and is calculated in
@@ -3045,18 +3039,16 @@ dissolved in water is
 
 .. math::
 
-   \begin{aligned}
      n_{aq} &=& C_{aq} LW_{volconc} V_{elevator\_air}\\
-            &&    \cdot10^3\textrm{L(solvent)/m}^3\textrm{(solvent)}\end{aligned}
+            &&    \cdot10^3\textrm{L(solvent)/m}^3\textrm{(solvent)}
 
 The mass fraction dissolved in the droplets (mass fraction equals mole
 fraction in this case), which is subject to washout, is therefore
 
 .. math::
 
-   \begin{aligned}
      f_{dissolved} &=& \frac{n_{aq}}{n_{aq} + n_g}\nonumber\\
-             &=& \frac{C_{aq} LW_{volconc}}{C_{aq} LW_{volconc} + C_g}\end{aligned}
+             &=& \frac{C_{aq} LW_{volconc}}{C_{aq} LW_{volconc} + C_g}
 
  and by Equation ([eq:henry\_caq]) we get
 
@@ -3695,11 +3687,10 @@ with :math:`F_T` similarly as explained for O\ :math:`_3`:
 
 .. math::
 
-   \begin{aligned}
      R_{snow}^{SO_2} &=& 70 \qquad\qquad\qquad T_{2M} \le +1^{\circ}\textrm{C}\nonumber\\
                  &=& 70\cdot(2-T_{2M})
                  \quad -1^{\circ}\textrm{C} \le T_{2M} < +1^{\circ}\textrm{C}\nonumber\\
-                 &=& 700 \qquad\qquad\qquad T_{2M} \le -1^{\circ}\textrm{C}\end{aligned}
+                 &=& 700 \qquad\qquad\qquad T_{2M} \le -1^{\circ}\textrm{C}
 
 The total conductance is then
 
@@ -3796,14 +3787,13 @@ The parameters :math:`a_1` and :math:`a_2` are
 
 .. math::
 
-   \begin{aligned}
      a_1 &=& \left\{
      \begin{array}{ll}
        0.002 & \textrm{non-forest}\\
        \max(0.002,0.008\frac{SAI}{10}) & \textrm{forest}
      \end{array}
      \right.\\
-     a_2 &=& 300\,\textrm{m}\end{aligned}
+     a_2 &=& 300\,\textrm{m}
 
 In principle, :math:`a_1` could differ from dry to wet surfaces. This is
 not yet taken into account for sulphate, MSA, nitrate and SOA. For
@@ -3813,10 +3803,9 @@ annual mean friction velocity (:math:`\overline{u_*}`):
 
 .. math::
 
-   \begin{aligned}
      a_{1,L} &=& \frac{V_{land}}{\overline{u_*}}\\
      a_{1,W} &=& \frac{V_{water}}{\overline{u_*}}\\
-     a_{1,I} &=& \frac{V_{ice}}{\overline{u_*}}\end{aligned}
+     a_{1,I} &=& \frac{V_{ice}}{\overline{u_*}}
 
 The :math:`V`-values are defined in the BC/OC module
 (Section [sxn:bcoc]) as 0.025cm/s, with the exception of hydrophilic
@@ -4257,11 +4246,10 @@ a standard emission \ :math:`E_s` at a standard temperature :math:`T_s`:
 
 .. math::
 
-   \begin{aligned}
      E &=& E_s f_{T}\label{eq:guenther1}\\
      f_{T} &=& \frac{\exp\left(\frac{C_1 (T - T_s)}{R T_s T}\right)}
                   {1 + \exp\left(\frac{C_2 (T - T_m)}{R T_s T}\right)}
-     \label{eq:guenther2}\end{aligned}
+     \label{eq:guenther2}
 
  Three empirical constants are used here: :math:`T_m=314`\ K,
 :math:`C_1=95000` and :math:`C_2=230000`.
@@ -4907,11 +4895,10 @@ total scaling factors:
 
 .. math::
 
-   \begin{aligned}
      s_L &=& \frac{\frac{f_{L,obs}}{f_{O,obs}+f_{L,obs}}}
                    {f_{tot,L}}\label{eq:scalefacL}\\
      s_O &=& \frac{\frac{f_{O,obs}}{f_{O,obs}+f_{L,obs}}}
-                   {f_{tot,O}}\label{eq:scalefacO}\end{aligned}
+                   {f_{tot,O}}\label{eq:scalefacO}
 
 For each time step, we can now calculate :math:`P_O` and :math:`P_L`,
 and multiply them with :math:`s_O` and :math:`s_L`, respectively, to get
@@ -5693,9 +5680,8 @@ HNO\ :math:`_3`:
 
 .. math::
 
-   \begin{aligned}
      \mu_{HNO_3} &=& 0.0024\mu_{O_3} \\
-     \mu_{NO}   &=& 0.0016\mu_{O_3} \end{aligned}
+     \mu_{NO}   &=& 0.0016\mu_{O_3} 
 
 The routines are shortly described in Appendix [app:strato3clim].
 
@@ -5985,10 +5971,9 @@ temperature is below :math:`T_{NAT}` given by
 
 .. math::
 
-   \begin{aligned}
      \log p_{HNO_3} &=& m(T)\log p_{H_2O} + b(T)\\
      m(T) &=& -2.7836 - 0.00088T\nonumber\\
-     b(T) &=& 38.9855 - \frac{11397}{T} + 0.009179T\nonumber\end{aligned}
+     b(T) &=& 38.9855 - \frac{11397}{T} + 0.009179T\nonumber
 
  At equilibrium we have :math:`T=T_{NAT}`. Below this temperature the
 particle is treated as supercooled ternary solution (STS, also known as
@@ -6465,9 +6450,8 @@ distributions.
 
   .. math::
 
-     \begin{aligned}
        A &=& \textrm{effective radius} \nonumber\\
-       B &=& \textrm{effective variance} \nonumber\end{aligned}
+       B &=& \textrm{effective variance} \nonumber
 
 This probably comes from Deirmendjian’s modified GAMMA (pure GAMMA when
 :math:`\gamma = 1`)
@@ -6484,40 +6468,36 @@ This probably comes from Deirmendjian’s modified GAMMA (pure GAMMA when
 
 .. math::
 
-   \begin{aligned}
      \alpha &=& \textrm{dimensionless integer} \nonumber\\
-     b &=& \textrm{has units of 1/radius} \nonumber\end{aligned}
+     b &=& \textrm{has units of 1/radius} \nonumber
 
 Lacis’s GAMMA: (NSD=1)
 
 .. math::
 
-   \begin{aligned}
       A &=& (\alpha + 3) / b = r_{eff} \\
         &&  \Rightarrow 1/b = r_{eff}/(\alpha+3) \nonumber\\
       B &=& 1 / (\alpha + 3) \\
       r_c &=& A * B  * (1/B - 3) = A * (1 - 3*B) \\
-      r_c &=& r_{mode} = r_{eff} * \alpha/(\alpha+3)\end{aligned}
+      r_c &=& r_{mode} = r_{eff} * \alpha/(\alpha+3)
 
 | *NSD=2; bi-modal Gamma distribution*
 | 
 
   .. math::
 
-     \begin{aligned}
        n(r) &=& \frac{1}{2} \frac{r^{1/B-3}\exp[-\frac{r}{AB}]}
                                {(AB)^{(1/B-2)}\Gamma[1/B-2]} \nonumber\\
             &&+ \frac{1}{2} \frac{r^{1/B-3}\exp[-\frac{r}{CB}]}
-                               {(CB)^{(1/B-2)}\Gamma[1/B-2]}\end{aligned}
+                               {(CB)^{(1/B-2)}\Gamma[1/B-2]}
 
    Here we have
 
   .. math::
 
-     \begin{aligned}
        A &=& \textrm{effective radius of mode 1} \nonumber\\
        B &=& \textrm{effective variance} \nonumber\\
-       C &=& \textrm{effective radius of mode 2} \nonumber\end{aligned}
+       C &=& \textrm{effective radius of mode 2} \nonumber
 
 | *NSD=3; Log-normal distribution*
 | 
@@ -6531,36 +6511,32 @@ Lacis’s GAMMA: (NSD=1)
 
   .. math::
 
-     \begin{aligned}
        A &=& r_g \nonumber\\
-       B &=& \ln(\sigma_g)  \nonumber\end{aligned}
+       B &=& \ln(\sigma_g)  \nonumber
 
 | *NSD=4; Power-law*
 | For :math:`a\ne 1` we have
 
   .. math::
 
-     \begin{aligned}
        n(r) &=& \frac{(a-1)r_1^{(a-1)}r_2^{(a-1)}}{r_2^{(a-1)} - r_1^{(a-1)}}r^{-a}\nonumber\\
             &=& \frac{1-a}{r_2^{(1-a)} - r_1^{(1-a)}}r^{-a}\quad\textrm{for }r_1\le r \le r_2\\
-            &=& 0 \quad \mathrm{otherwise}\end{aligned}
+            &=& 0 \quad \mathrm{otherwise}
 
    and for :math:`a=1`
 
   .. math::
 
-     \begin{aligned}
        n(r) &=& \frac{r}{\ln{r_2/r_1}} \quad\textrm{for }r_1\le r \le r_2 \\
-            &=& 0 \quad \mathrm{otherwise}\end{aligned}
+            &=& 0 \quad \mathrm{otherwise}
 
    where
 
   .. math::
 
-     \begin{aligned}
        A &=& a \nonumber \\
        C &=& r_2 \nonumber\\
-       B &=& r_1  \nonumber\end{aligned}
+       B &=& r_1  \nonumber
 
 Mishchenko spher.f
 ~~~~~~~~~~~~~~~~~~
@@ -7929,11 +7905,10 @@ fraction of current and next fields are then
 
 .. math::
 
-   \begin{aligned}
      f_{\textrm{next}} &=& \frac{\textrm{nmetTimeIntegrated}
                    + \frac{\Delta t_{\textrm{chem2}}}{2}}
                           {\Delta t_{\textrm{met}}}\\
-     f_{\textrm{cur}} &=& 1 - f_{\textrm{next}}\end{aligned}
+     f_{\textrm{cur}} &=& 1 - f_{\textrm{next}}
 
  where ``nmetTimeIntegrated`` is the elapsed time of the meteorological
 time step, and :math:`\Delta t_{\textrm{met}}` is the meteorological
@@ -7944,9 +7919,8 @@ done to get ``BLH`` at each ``NOPS``:
 
 .. math::
 
-   \begin{aligned}
      f_{\textrm{next}} &=& \frac{\texttt{NOPS}-1}{\texttt{NROPSM}}\\
-     f_{\textrm{cur}} &=& 1 - f_{\textrm{next}}\end{aligned}
+     f_{\textrm{cur}} &=& 1 - f_{\textrm{next}}
 
 Both ``BLH_CUR`` and ``BLH_NEXT`` needs to be set when reading
 meteorological data. If ``BLH_NEXT`` cannot be found, it should be set
@@ -11741,9 +11715,8 @@ From the equation of state, we have densities expressed by pressure
 
 .. math::
 
-   \begin{aligned}
      \varrho_a &=& \frac{p_a}{R_a\,T}\label{eq:stateair}\\
-     \varrho_v &=& \frac{p_v}{R_v\,T}\label{eq:statewater}\end{aligned}
+     \varrho_v &=& \frac{p_v}{R_v\,T}\label{eq:statewater}
 
 From Eq. ([eq:qhum]) we see that
 

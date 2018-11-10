@@ -24,6 +24,8 @@ Abstract
    scavenging_wet_v1.0.inp.rst
    station.rst
 
+.. rubric:: References
+
 .. bibliography:: references_ctm.bib
 
 Indices and tables
