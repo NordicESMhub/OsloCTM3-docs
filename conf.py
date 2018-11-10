@@ -20,8 +20,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'OsloCTM3'
-copyright = '2018, Amund Søvde Haslerud, Stefanie Falk and Anne Fouilloux'
-author = 'Amund Søvde Haslerud, Stefanie Falk and Anne Fouilloux'
+copyright = '2018, Amund Sovde Haslerud, Stefanie Falk and Anne Fouilloux'
+author = 'Amund Sovde Haslerud, Stefanie Falk and Anne Fouilloux'
 
 # The short X.Y version
 version = ''
