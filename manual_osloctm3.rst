@@ -29,7 +29,7 @@ Historical background
 Oslo CTM3 is developed at the Department of Geosciences at the
 University of Oslo (UiO), and later at the CICERO Center for
 International Climate Research. It is described by
-:raw-latex:`\citet{SovdeEA2012}` and is an updated version of the
+:cite:`SovdeEA2012` and is an updated version of the
 Oslo CTM2, which was based on a CTM from University of California,
 Irvine (UCI), developed by Michael Prather & Xin Zhu (January 1996,
 p-code 1.0/96), and where the chemical modules developed at the UiO were
@@ -50,11 +50,11 @@ core structure also initiated a clean-up of the Oslo CTM2 code.
 Version numbering
 -----------------
 
-The Oslo CTM3 documented by :raw-latex:`\citet{SovdeEA2012}` is to be
+The Oslo CTM3 documented by :cite:`SovdeEA2012` is to be
 considered version v0.1, while the current version is v1.0. Version
 numbering is not directly related to repository revision numbers,
 however, in the Oslo CTM3 repository, the version documented by
-:raw-latex:`\citet{SovdeEA2012}` was r143.
+:cite:`SovdeEA2012` was r143.
 
 There are numerous small changes from version v0.1 to v1.0, e.g. that
 the aerosol packages have undergone some revisions, and the scavenging
@@ -389,22 +389,22 @@ number (which is 71).
 | The convectivity files used for lightning emission in Oslo CTM2 are
   not needed in the Oslo CTM3. This is because the lightning routine is
   now more consistent with the meteorological data, not using the
-  :raw-latex:`\citet{PriceEA1997a}` dataset.
+  :cite:`PriceEA1997a` dataset.
 
 In the Oslo CTM3 we calculate a somewhat similar convective activity at
 each time step and scale it against a climatological mean. This mean is
 specific for a certain meteorological dataset, and is sensitive for
 resolution. An important difference to the Oslo CTM2 is that the
 Oslo CTM2 divided the annual amount following the monthly totals of
-:raw-latex:`\citet{PriceEA1997a}`, whereas Oslo CTM3 more physically
+:cite:`PriceEA1997a`, whereas Oslo CTM3 more physically
 follows only the meteorological conditions. It could be noted that
-:raw-latex:`\citet{MurrayEA2012}` argue that Northern Hemisphere summer
+:cite:`MurrayEA2012` argue that Northern Hemisphere summer
 lightning produce more NOx than elsewhere and at other seasons, but this
 is not included in Oslo CTM3. See Section [sxn:emissions\_lightning] for
 more on lightning emissions.
 
 | **fast-JX**
-| The Fast-J2 :raw-latex:`\citep{BianPrather2002}` applied in the
+| The Fast-J2 :cite:`BianPrather2002` applied in the
   Oslo CTM2 has been replaced by fast-JX in the Oslo CTM3. There are
   some differences in the photochemistry, e.g. slight differences in
   cross sections.
@@ -968,7 +968,7 @@ and interpolation to model resolution is carried out on-line.
 
 These data were compiled by David Considine and Larry Thomason at NASA
 LaRC, based on SAGE II, SAGE I and SAM II satellites. Data was prepared
-by the approach of :raw-latex:`\citet{ThomasonEA1997}`, and
+by the approach of :cite:`ThomasonEA1997`, and
 a description can be found in the *backaer\_monthly/* directory.
 
 The data are read from the original resolution and interpolated on-line
@@ -1039,7 +1039,7 @@ each process before the next is started.
 It is possible to run the Oslo CTM3 with as short operator split time
 step as wanted. Halving the value to ``NROPSM=6`` will improve the polar
 vortex gradients, and should be used when studying the polar
-stratosphere :raw-latex:`\citep{SovdeEA2012}`.
+stratosphere :cite:`SovdeEA2012`.
 
 In addition, it is possible to use a more accurate treatment of the
 polar cap transport. The improved transport improves cross-polar
@@ -2318,9 +2318,9 @@ Transport
 Transport of atmospheric species is done by large scale advection,
 convection and turbulent mixing. The latter is most important in the
 boundary layer. The basis for the Oslo CTM3 transport is the Secondary
-Order Moments scheme introduced by :raw-latex:`\citet{Prather1986}`,
+Order Moments scheme introduced by :cite:`Prather1986`,
 which was later re-structured and documented in
-:raw-latex:`\citet{PratherEA2008}`.
+:cite:`PratherEA2008`.
 
 Secondary Order Moments
 -----------------------
@@ -2338,7 +2338,7 @@ transported.
 The moment array sizes are (``IPAR``,\ ``JPAR``,\ ``LPAR``,\ ``NPAR``),
 and their units are the same as for the mean grid value (i.e. kg/grid
 box). This may be somewhat counter-intuitive, but is explained in
-:raw-latex:`\citet{Prather1986}`.
+:cite:`Prather1986`.
 
 The horizontal mass fluxes due to advection is stored in two arrays, one
 for zonal divergence (``ALFA``) and one for meridional (``BETA``).
@@ -2367,11 +2367,11 @@ Advection
 ---------
 
 Advection is carried out through the use of Secondary Order Moments
-scheme, as described by :raw-latex:`\citet{PratherEA2008}`. The
+scheme, as described by :cite:`PratherEA2008`. The
 transport papers are available for free at his web page [1]_.
 
 The global time step is based upon a Lifshitz criterion, which in our
-case is a divergence criterion :raw-latex:`\citep{PratherEA2008}`. The
+case is a divergence criterion :cite:`PratherEA2008`. The
 transporting routine – ``qvect3`` – has an internal CFL criteria / time
 stepping. The latter allows a shorter time step at high latitudes where
 the grid boxes are smaller compared to low latitudes.
@@ -2389,7 +2389,7 @@ are no longer combined in transport (the so-called extended polar
 zones).
 
 There is, however, one important update from the 2008 description. In
-:raw-latex:`\citet{SovdeEA2012}`, the treatment of horizontal transport
+:cite:`SovdeEA2012`, the treatment of horizontal transport
 at the polar caps was updated (see Section [sxn:transport\_adv\_hor]).
 
 Horizontal advection
@@ -2399,12 +2399,12 @@ The horizontal advection is carried out layer by layer, so that each CPU
 works on a whole layer. The routines are ``DYN2UL`` and ``DYN2VL``,
 located in *p-dyn2.f*.
 
-In :raw-latex:`\citet{PratherEA2008}`, the polar cap treatment of
+In :cite:`PratherEA2008`, the polar cap treatment of
 horizontal transport was to combine the polar boxes ``I`` and
 ``I+IPAR/2``, for meridional transport, while maintaining the gradients.
 This did not work well, and was updated in 2011 to allow for a more
 accurate treatment, which are described in
-:raw-latex:`\citet{SovdeEA2012}`.
+:cite:`SovdeEA2012`.
 
 For meridional transport, the two pie-shaped boxes on opposite sides of
 the poles are no longer combined, and the V-flux across the pole is
@@ -2486,7 +2486,7 @@ Section [sxn:conv\_scav], whereas the transport is described here.
 
 Convective transport is calculated using mass fluxes of updrafts and
 downdrafts. The ECMWF IFS convective scheme is based on
-:raw-latex:`\citet{Tiedtke1989}`, so we use the same reference for the
+:cite:`Tiedtke1989`, so we use the same reference for the
 Oslo CTM3 convection.
 
 Two important processes that occur in convection are entrainment and
@@ -2633,7 +2633,7 @@ Prather scheme.
 NBLX=5: Holtslag
 ~~~~~~~~~~~~~~~~
 
-The :raw-latex:`\citet{HoltslagEA1990}` k-profile scheme has been
+The :cite:`HoltslagEA1990` k-profile scheme has been
 retrieved from the previous version of the UCI model (qcode 55). The
 boundary layer height needs to be doubled due to catch the whole
 boundary layer. In L40, a maximum of 9000m was used, but for L60 this
@@ -2757,7 +2757,7 @@ scavenging.
 
 No scavenging below 258K.
 
-For temperatures below 258K use :raw-latex:`\citet{KarcherVoigt2006}`.
+For temperatures below 258K use :cite:`KarcherVoigt2006`.
 
 Use same treatment as for 258K–273K, i.e. with retention coefficient.
 
@@ -2773,7 +2773,7 @@ Large scale scavenging
 The large scale scavenging master routine located in ``WASHOUT0``. While
 the model in principle can use a simplified scheme (``WASHOUT1``), it
 has been disabled for Oslo CTM3; we only use the more sophisticated
-version by :raw-latex:`\citet{NeuPrather2012}` (``WASHOUT2``), which
+version by :cite:`NeuPrather2012` (``WASHOUT2``), which
 scavenge separately by liquid and ice precipitation. It is still
 possible to choose the simple scheme by changing the parameter ``NSCX``
 in the input file *LxxCTM.inp*, but the data needed is not read into the
@@ -2793,7 +2793,7 @@ Clear sky with no rain.
 
 Fractional areas are calculated and may change e.g. due to evaporation.
 A constant evaporation rate is used. More details are explained by
-:raw-latex:`\citet{NeuPrather2012}`.
+:cite:`NeuPrather2012`.
 
 For some species, such as HNO\ :math:`_3` and some aerosols, uptake on
 ice may be important. Uptake on ice is controlled by a non-zero ice
@@ -2803,7 +2803,7 @@ uptake is generally calculated using Henry’s law and the table-specified
 Henry’s law coefficients, modified by a retention coefficient. This is
 because Henry expressions are not given for temperatures below
 0\ :math:`^{\circ}`\ C, and currently the retention coefficient is set
-to 0.5 :raw-latex:`\citep{NeuPrather2012}`. Mass limited ice removal of
+to 0.5 :cite:`NeuPrather2012`. Mass limited ice removal of
 species is calculated assuming a Henry coefficient of
 typically 10\ :math:`^8`, which will yield the species completely
 dissolved, even if the retention coefficient is 0.5.
@@ -2813,7 +2813,7 @@ Note that the retention coefficient can possibly be overwritten by the
 could become part of the scavenging table.
 
 Uptake of HNO\ :math:`_3` on ice can also occur below 258K, and follows
-:raw-latex:`\citet{KarcherVoigt2006}` when ``IT`` is set to 1. Other
+:cite:`KarcherVoigt2006` when ``IT`` is set to 1. Other
 options are also available.
 
 Convective scavenging
@@ -2883,7 +2883,7 @@ the background of this equation here.
 
 First of all, there are several data on Henry coefficients; usually they
 are given at 298K, together with a temperature coefficient. Another
-possibility, as in :raw-latex:`\citet{jpl10-06}`, coefficients are given
+possibility, as in :cite:`jpl10-06`, coefficients are given
 for the expression:
 
 .. math:: \ln H(T) = A + \frac{B}{T} + C\,\ln T
@@ -2911,7 +2911,7 @@ between temperatures :math:`T_1` and :math:`T_2`:
 .. math:: \frac{\Delta H_{sol}}{R} = - \frac{d\,\ln H}{d(\frac{1}{T})}
 
  is the :math:`B` coefficient given e.g. by
-:raw-latex:`\citet{jpl10-06}` and also used in the Oslo CTM3. Hence,
+:cite:`jpl10-06` and also used in the Oslo CTM3. Hence,
 using :math:`T_2=298`\ K, the model finds the Henry expression at any
 temperature:
 
@@ -3111,12 +3111,12 @@ Section [sxn:drydeptech\_new]–[sxn:drydeptech].
 Historical note
 ~~~~~~~~~~~~~~~
 
-In the Oslo CTM3 :raw-latex:`\citep{SovdeEA2012}` and its predecessor
+In the Oslo CTM3 :cite:`SovdeEA2012` and its predecessor
 Oslo CTM2 dry deposition has been parameterised based on
-:raw-latex:`\citet{Wesely1989}`, not by calculating the deposition
+:cite:`Wesely1989`, not by calculating the deposition
 velocities from equations, but rather by using seasonal day and night
 averaged deposition velocities for different land use types. However,
-some velocities seem to rather come from :raw-latex:`\citet{Hough1991}`.
+some velocities seem to rather come from :cite:`Hough1991`.
 
 Using 5 land-use types (water, forest, grass, tundra/desert and
 ice/snow) in each gridbox, a mean velocity was then defined. Day and
@@ -3137,7 +3137,7 @@ The new dry deposition scheme
 
 The dry deposition parameterisation is in the process of being updated
 to follow the method of the EMEP model
-:raw-latex:`\citep{SimpsonEA2012}`. It is a more physical approach and
+:cite:`SimpsonEA2012`. It is a more physical approach and
 is described in detail in Section [sxn:drydeptech].
 
 The EMEP method is used for the gaseous species O\ :math:`_3`,
@@ -3240,7 +3240,7 @@ Hence, it is the velocities (or conductances) which have to be weighted
 according to land-use fractions, to get a gridbox mean velocity.
 
 The new dry deposition scheme calculates :math:`R_a`, :math:`R_b^i` and
-:math:`R_c^i` following :raw-latex:`\citet{SimpsonEA2012}`, which will
+:math:`R_c^i` following :cite:`SimpsonEA2012`, which will
 be referred to as EMEP2012. Main gases included are O\ :math:`_3`,
 SO\ :math:`_2`, NH\ :math:`_3`, NO\ :math:`_2`,
 H\ :math:`_2`\ O\ :math:`_2` and HNO\ :math:`_3`, but in addition I have
@@ -3251,7 +3251,7 @@ As already noted, dry deposition of CO is still treated with the old
 scheme. This is because it is not available through EMEP2012. In
 general, CO dry deposition is so small that models tend to exclude it.
 It is set to 0.03cm/s over vegetated areas
-:raw-latex:`\citet{ConradSeiler1985}`, and it is reduced when there is
+:cite:`ConradSeiler1985`, and it is reduced when there is
 snow.
 
 Aerosols are not part of the new update and follows the old deposition
@@ -3262,7 +3262,7 @@ in the sea salt or mineral dust modules.
 | To use this treatment, both the nitrate and sulphur modules should be
   included. They are needed for calculation of SO\ :math:`_2` deposition
   which is again needed to calculate dry deposition velocities for other
-  gases. Note that :raw-latex:`\citet{SovdeEA2012}` concluded that these
+  gases. Note that :cite:`SovdeEA2012` concluded that these
   modules should be included anyway; doing so does not increase
   computing time by much. Still, if sulphur and nitrate are not
   included, a monthly model climatology of the parameters :math:`a_{sn}`
@@ -3274,7 +3274,7 @@ stop.
 
 | **Aerodynamical resistance R\ :math:`_a`**
 | The aerodynamical resistance (:math:`R_a`) in EMEP2012 is not well
-  defined in :raw-latex:`\citet{SimpsonEA2012}`. They first assess
+  defined in :cite:`SimpsonEA2012`. They first assess
   friction velocity :math:`u_*` by using stability functions (Eq. (52)
   in EMEP2012):
 
@@ -3292,7 +3292,7 @@ stop.
   equation for :math:`R_a`.
 
 A somewhat similar expression is found for :math:`R_a` in the earlier
-EMEP version :raw-latex:`\citep[EMEP2003,][]{SimpsonEA2003}`, namely
+EMEP version :cite:`SimpsonEA2003`, namely
 
 .. math::
 
@@ -3306,7 +3306,7 @@ Eq. ([eq:ra1]) can produce a negative :math:`R_a`, which is wrong. This
 also applies to the :math:`u_*` calculation of EMEP2012.
 
 Therefore we use a different approach in Oslo CTM3, namely the method of
-:raw-latex:`\citet{Monteith1973}`. Sensible heat flux (:math:`SHF`)
+:cite:`Monteith1973`. Sensible heat flux (:math:`SHF`)
 between surface and air is given by
 
 .. math:: SHF = \rho c_p \frac{T_0-T_z}{R_{a,H}}\label{eq:ra2}
@@ -3339,7 +3339,7 @@ diffusitivities. When :math:`K_M=K_H`, Eq. ([eq:monSHF]) and
 
  where :math:`T_z` and :math:`u_z` are temperature and wind speed at
 height \ :math:`z`. From Eq. ([eq:ra2]) we get the
-:raw-latex:`\citet{Monteith1973}` equation for :math:`R_{a,H}`:
+:cite:`Monteith1973` equation for :math:`R_{a,H}`:
 
 .. math:: R_{a,H} = \frac{u_z}{u_*^2}
 
@@ -3387,7 +3387,7 @@ Over sea we use
 value over ocean. Hence, a different approach is taken to find
 :math:`z_0` over water; assuming different approaches over calm and
 rough ocean, separated by wind speed of 3m/s. Calm sea follows
-e.g. :raw-latex:`\citet{Hinze1975}` or :raw-latex:`\citet{Garratt1992}`,
+e.g. :cite:`Hinze1975` or :cite:`Garratt1992`,
 but with a slightly higher coefficient:
 
 .. math:: z_{0,w,calm} = \min\left(2\cdot10^{-3},\,0.135 \frac{\nu}{u_*} \right)
@@ -3402,8 +3402,8 @@ temperature \ :math:`T_{2M}`) and gas constant for air
  Here the numerator is absolute viscosity and the denominator is air
 density.
 
-Rough sea follows the method of :raw-latex:`\citet{Wu1980}`, which is
-the :raw-latex:`\citet{Charnock1955}` method with slightly higher
+Rough sea follows the method of :cite:`Wu1980`, which is
+the :cite:`Charnock1955` method with slightly higher
 coefficient.
 
 .. math:: z_{0,w,rough} = \min\left(2\cdot10^{-3},\, 0.018 \frac{u_*^2}{g} \right)
@@ -3479,7 +3479,7 @@ I will let others decide whether 500 is a suitable value.
 Temperature scaling is done using minimum, optimal and maximum
 temperatures, however, for simplicity, I have not done this for each
 canopy type. I picked average values from
-:raw-latex:`\citet{SimpsonEA2012}`. Not the best for tropical forests,
+:cite:`SimpsonEA2012`. Not the best for tropical forests,
 so feel free to revise it.
 
 .. math::
@@ -3559,7 +3559,7 @@ snow cover :math:`f_{snow}(N)`:
       \label{eq:rgso3corr}
 
  Note that EMEP2012 uses :math:`2f_{snow}` with a range of [0,1]. This
-is explained weirdly in :raw-latex:`\citet{ZhangEA2003}`, but we stick
+is explained weirdly in :cite:`ZhangEA2003`, but we stick
 to using \ :math:`f_{snow}` with range [0,1].
 
 Table [table:landuse] lists all land-use types and according values of
@@ -3658,7 +3658,7 @@ Finally, we have the gridbox average :math:`R_c^{O_3}`:
 
   .. math:: F_2 = 10^{-1.1099\,a_{sn}+1.6769}
 
-   See :raw-latex:`\citet{SimpsonEA2012}` for references.
+   See :cite:`SimpsonEA2012` for references.
 
 If you run the Oslo CTM3 without the nitrate and sulphur modules,
 :math:`a_{sn}` should be read from a monthly model climatology.
@@ -3732,7 +3732,7 @@ If you run the Oslo CTM3 without the nitrate and sulphur modules,
         \label{eq:gnstoti}
 
    where :math:`H_*^i` and :math:`f_0^i` are taken from tables in
-  :raw-latex:`\citet{Wesely1989}`, also listed in Table [table:wesely].
+  :cite:`Wesely1989`, also listed in Table [table:wesely].
   From these we find the surface resistance for gas :math:`i`:
 
   .. math:: R_c^{i} = \frac{1}{G_{ns,tot}^{i}}
@@ -3774,7 +3774,7 @@ Technical description: aerosols
 
 The sea salt (Section [sxn:salt]) and mineral dust (Section [sxn:dust])
 modules have their own deposition routines. For BC/OC, sulphate and SOA,
-however, we use the EMEP treatment :raw-latex:`\citep{SimpsonEA2012}`.
+however, we use the EMEP treatment :cite:`SimpsonEA2012`.
 They give the dry deposition velocity :math:`v_d` as
 
 .. math::
@@ -3788,7 +3788,7 @@ They give the dry deposition velocity :math:`v_d` as
    \right.
 
  where :math:`F_N = 3` for fine-nitrate and ammonium, and :math:`F_N=1`
-for all other aerosols. :raw-latex:`\citet{SimpsonEA2012}` limit this to
+for all other aerosols. :cite:`SimpsonEA2012` limit this to
 :math:`1/L<-0.04`\ m\ :math:`^{-1}`, which means that for
 :math:`-25<L<0` we use :math:`L=-25` in Eq. ([eq:a1fn]).
 
@@ -4106,13 +4106,13 @@ As already mentioned, there are several emission inventories available,
 and most are listed in the directory *tables*\ */EMISSION\_LISTS*.
 Usually, the natural and anthropogenic emissions are separated into
 different datasets. E.g. natural biogenic, oceanic and soil emissions
-may be taken from POET :raw-latex:`\citep{GranierEA2005,POETreport2}`.
+may be taken from POET :cite:`GranierEA2005`, :cite:`POETreport2`.
 Biogenic emissions may rather be taken from more recent MEGAN datasets,
 but note that MEAGAN does not comprise oceanic emissions, nor soil
 emissions of NO\ :math:`_x`. Recently, a newer MEGAN dataset has become
 available, the so-called MEGAN-MACC
-:raw-latex:`\citep{SindelarovaEA2014}`. Anthropogenic emission datasets
-are e.g. CEDS, RETRO, :raw-latex:`\citet{LamarqueEA2010}`, EDGARv4.2 or
+:cite:`SindelarovaEA2014`. Anthropogenic emission datasets
+are e.g. CEDS, RETRO, :cite:`LamarqueEA2010`, EDGARv4.2 or
 ECLIPSE.
 
 You specify which emission datasets to include in the emission list
@@ -4250,7 +4250,7 @@ night. You set this option by ``DIURN=4`` in the emission list.
   the years 1997–2010 using our T42L60 meteorological data (ECMWF IFS
   cycle 36r1).
 
-This method is based upon :raw-latex:`\citet{GuentherEA1995}`, who
+This method is based upon :cite:`GuentherEA1995`, who
 described the effect of temperature on emissions of VOCs. They found
 that the emissions \ :math:`E` could be described by variation around
 a standard emission \ :math:`E_s` at a standard temperature :math:`T_s`:
@@ -4296,7 +4296,7 @@ option by ``DIURN=3`` in the emission list.
 
 This is so far only set up on a monthly basis, but could in principle be
 updated every meteorological time step.
-:raw-latex:`\citet{StohlEA2013}`, however, found that using a monthly
+:cite:`StohlEA2013`, however, found that using a monthly
 variation was a good approximation.
 
 Vertical distribution of 2D emissions
@@ -4379,7 +4379,7 @@ as production terms in chemistry.
 
 | **Organic matter from ocean**
 | The emission of organic matter from ocean follows
-  :raw-latex:`\citet{GanttEA2015}`, based on chlorophyll A and sea
+  :cite:`GanttEA2015`, based on chlorophyll A and sea
   spray.
 
 Sea spray is taken from the sea salt module if it is included. Several
@@ -4428,7 +4428,7 @@ options for GFEDv4 are described below.
 
 The code defines ``FF_TYPE``, while the year defines ``FF_YEAR`` and the
 path defines ``FF_PATH``. See Table [table:ffcode]. A diurnal cycle is
-further added, according to :raw-latex:`\citet{RobertsEA2009}`, putting
+further added, according to :cite:`RobertsEA2009`, putting
 increasing daytime emissions by 90% (7–19 local hours) and reducing
 nighttime emissions to 10%.
 
@@ -4519,7 +4519,7 @@ Biogenic emissions: MEGAN
 -------------------------
 
 The emission model MEGAN, version 2.10
-:raw-latex:`\citep{GuentherEA2012}`, is included in the Oslo CTM3. You
+:cite:`GuentherEA2012`, is included in the Oslo CTM3. You
 turn it on by including it in the emission list (STV section), as in
 Table [table:emismegan].
 
@@ -4556,7 +4556,7 @@ is through *megan\_tables.dat*, found in the *tables/* directory.
 Here is a list of the tables (in appearing order):
 
 #. Megan original species (20 of them). Note that soil NOx is included,
-   even if it is not described by :raw-latex:`\citep{GuentherEA2012}`.
+   even if it is not described by :cite:`GuentherEA2012`.
 
 #. | Canopy types, or plant function types (PFTs). There are 16 of
      these, listed in Table [table:megan\_pft], and stored in the
@@ -4566,7 +4566,7 @@ Here is a list of the tables (in appearing order):
 #. | Canopy Characteristics, listed in Table [table:megan\_pft].
 
 #. | Emission factors for the 20 MEGAN species for each canopy type.
-     This is Table 2 in :raw-latex:`\citet{GuentherEA2012}`.
+     This is Table 2 in :cite:`GuentherEA2012`.
 
 #. Emission factors for each specified species (151 of those). In the
    MEGAN original, these should sum up to 1 for each of the 20 species.
@@ -4668,7 +4668,7 @@ this, but is clearly not what was intended in MEGAN.
 MEGAN method, but for NO the speciation factors have to take into
 account the difference in molecular weights. These are thus scaled so
 that 4% of NO is emitted as NO\ :math:`_2`. The total atmospheric source
-of NOx is 6Tg(N) from soil, based on :raw-latex:`\citet{HudmanEA2012}`,
+of NOx is 6Tg(N) from soil, based on :cite:`HudmanEA2012`,
 assuming a total source of 7.5Tg(N) combined with canopy uptake of 20%.
 Inclusion of NO\ :math:`_2` makes it 151 speciated species in total.
 
@@ -4694,10 +4694,10 @@ than one.
 
 **Global scaling factor**: The global scaling factor :math:`Cce` is set
 to 0.466, to match the total isoprene emissions in MEGAN-MACC
-:raw-latex:`\citep{SindelarovaEA2014}` for year 2000 (i.e. 572Tg/yr),
+:cite:`SindelarovaEA2014` for year 2000 (i.e. 572Tg/yr),
 using 1982–1998 climatology of LAI and z0. The scaling factor was
 originally 0.56 in the MEGAN code, whereas e.g. CLM uses 0.4
-:raw-latex:`\citep{GuentherEA2012}`.
+:cite:`GuentherEA2012`.
 
 **DI initialised**: The Palmer severity drought index (DI) was never
 initialised, and is set to zero. In the original MEGAN code it was
@@ -4717,9 +4717,9 @@ following the BUDGETS calendar, and put in files
 tendencies.
 
 Table [table:megantotals] lists the Oslo CTM3 MEGAN emissions for year
-2000, matching the values in :raw-latex:`\citet{GuentherEA2012}` fairly
+2000, matching the values in :cite:`GuentherEA2012` fairly
 well. While our isoprene is somewhat higher, other components are lower
-than in :raw-latex:`\citet{GuentherEA2012}`, mainly due to different
+than in :cite:`GuentherEA2012`, mainly due to different
 input datasets (LAI, roughness length, temperature, photosynthetic
 active radiation). Note that CH\ :math:`_3`\ OH was included in this
 process – it was not accounted for in earlier versions of Oslo CTM3.
@@ -4801,14 +4801,14 @@ since H\ :math:`_2`\ O is not transported in the troposphere, and
 depending on your setup, maybe not in the stratosphere. This separate
 aircraft H\ :math:`_2`\ O tracer is given the tracer number 148, and
 must be transported. It is removed below 400hPa according to
-:raw-latex:`\citet{DanilinEA1998}`, by assuming a lifetime of 1hour.
+:cite:`DanilinEA1998`, by assuming a lifetime of 1hour.
 
 Lightning emissions
 -------------------
 
 Lightning is a major contributor to NOx in the atmosphere, assumed to
 amount to :math:`5 \pm 3`\ Tg(N)/year
-:raw-latex:`\citep{ShumannHuntrieser2007}`. As will be described below,
+:cite:`ShumannHuntrieser2007`. As will be described below,
 we use a climatological value of :math:`\sim`\ 5Tg(N)/year, i.e. the
 emissions will vary somewhat from year to year due to different
 meteorology.
@@ -4828,7 +4828,7 @@ understand the horizontal and vertical distributions.
 
 The horizontal distribution of lightning NOx (L-NOx) was updated in 2011
 by Chris D. Holmes at UCI, and was documented in
-:raw-latex:`\citet{SovdeEA2012}`. However, it was locked to the T42
+:cite:`SovdeEA2012`. However, it was locked to the T42
 resolution, and had to be updated in order to properly use higher
 resolutions. The current version is documented below as OAS2015
 (Section [sxn:emissions\_lightning\_hor]), while the GMD version is
@@ -4839,7 +4839,7 @@ another method (AP2002).
 Horizontal distribution – OAS2015
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The :raw-latex:`\citet{PriceEA1997a}` equations for flash rates over
+The :cite:`PriceEA1997a` equations for flash rates over
 land and ocean are the basis for Oslo CTM3 L-NOx:
 
 .. math::
@@ -4853,10 +4853,10 @@ land and ocean are the basis for Oslo CTM3 L-NOx:
      \right.
 
  where :math:`P_L` and :math:`P_O` are the
-:raw-latex:`\citet{PriceEA1997a}` equations for a given location
+:cite:`PriceEA1997a` equations for a given location
 :math:`\vec{x}` and time :math:`t`, but *without* scaling factors.
 :math:`s_L` and :math:`s_O` are scaling factors, however, the
-:raw-latex:`\citet{PriceEA1997a}` scaling factors will most likely not
+:cite:`PriceEA1997a` scaling factors will most likely not
 be suitable when using the global meteorological fields in the model.
 Therefore, we generate our own scaling factors, so that the flash rates
 calculated from meteorological data match what is observed. These will
@@ -4880,7 +4880,7 @@ into it.
   :math:`s_O`.
 
 In this process, we also use the scaling factors to change units from
-flashes per minute :raw-latex:`\citep[as in][]{PriceEA1997a}` to annual
+flashes per minute :cite:`PriceEA1997a` to annual
 fraction of flashes per second (the reason will become evident in the
 next paragraphs).
 
@@ -4935,10 +4935,10 @@ several years, to make climatological scaling factors.
   are calculated as a mean of 1995–2005. When combining grid boxes 2x2,
   only the year 2005 has been used.
 
-Observed flash rates are taken from :raw-latex:`\citet{CecilEA2014}`,
+Observed flash rates are taken from :cite:`CecilEA2014`,
 where the average flash rate over land is 36.9fls\ :math:`^{-1}` and
 9.1fls\ :math:`^{-1}` over ocean, using the HRAC dataset
-:raw-latex:`\citep{LISOTDHRAC}`. A climatological flash rate of
+:cite:`LISOTDHRAC`. A climatological flash rate of
 46s\ :math:`^{-1}` implies an average production rate of 3.45kg(N) per
 flash, or 246mol/flash. An IDL program calculating these values is given
 by *lightning\_lisotd.pro* in the IDL utilities.
@@ -4990,11 +4990,11 @@ The second considers maximum temperature, linearly increasing from 0 at
 Horizontal distribution – GMD2012
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The GMD2012 L-NOx method documented by :raw-latex:`\citet{SovdeEA2012}`
-uses the :raw-latex:`\citet{PriceRind1992}` equations and measurements
+The GMD2012 L-NOx method documented by :cite:`SovdeEA2012`
+uses the :cite:`PriceRind1992` equations and measurements
 by Optical Transient Detector (OTD,
-:raw-latex:`\citet{ChristianEA1999a}`) and Lightning Imaging Sensor
-(LIS, :raw-latex:`\citet{ChristianEA1999b}`). The difference to the
+:cite:`ChristianEA1999a`) and Lightning Imaging Sensor
+(LIS, :cite:`ChristianEA1999b`). The difference to the
 OAS2015 scheme is the filtering of convective instances producing
 lightning.
 
@@ -5047,13 +5047,13 @@ average flash rate is:
 
 The average flash frequencies for our meteorological data 1999–2009
 (ECMWF cycle 36r1, resolution T42L60), imply that :math:`\beta_l = 6`
-and :math:`\beta_o = 210`. :raw-latex:`\citet{SovdeEA2012}` presented
+and :math:`\beta_o = 210`. :cite:`SovdeEA2012` presented
 the factors :math:`\beta_l = 0.10` and :math:`\beta_o = 3.50`, but these
 were calculated using the original units of the
-:raw-latex:`\citet{PriceRind1992}` equations (flashes/minute) and were
+:cite:`PriceRind1992` equations (flashes/minute) and were
 therefore a factor 1/60 smaller.
 
-Compared to the :raw-latex:`\citet{PriceRind1992}` coefficients, the
+Compared to the :cite:`PriceRind1992` coefficients, the
 gridbox average flash rates are thus scaled up by about 6 over land and
 200 over ocean to match observed flash rates.
 
@@ -5064,7 +5064,7 @@ Horizontal distribution – AP2002
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are other possible parameterisation, e.g.
-:raw-latex:`\citet{AllenPickering2002}`, where the cloud-to-ground (CG)
+:cite:`AllenPickering2002`, where the cloud-to-ground (CG)
 flash frequency (:math:`LF_{cg}`) is calculated from the mass flux
 (:math:`M`) at 440hPa. Hence, the convective plumes must reach 440hPa,
 and the equation is
@@ -5082,7 +5082,7 @@ this will be of no consequence since we scale the flash rates to match
 observations).
 
 To account for intra-cloud lightning, CG fraction can be found from the
-cold-cloud thickness :raw-latex:`\citep[$\Delta Z$,][]{PriceRind1993}`,
+cold-cloud thickness :cite:`PriceRind1993`,
 i.e. the depth (km) of the cloud above the freezing level. In the model,
 it is calculated between cloud top and the midpoint of the highest layer
 where the temperature exceeds 273K.
@@ -5121,7 +5121,7 @@ filtering the convective lightning events.
 Horizontal distribution – other
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The parameterisation described by :raw-latex:`\citet{GreweEA2001}` could
+The parameterisation described by :cite:`GreweEA2001` could
 be an option for Oslo CTM3, but this method is rather similar to the
 current approach.
 
@@ -5129,19 +5129,19 @@ Vertical distribution
 ~~~~~~~~~~~~~~~~~~~~~
 
 Many CTMs distribute L-NOx vertically by using the vertical profiles of
-:raw-latex:`\citet{PickeringEA1998}`. Those profiles have recently been
-revised by :raw-latex:`\citet{OttEA2010}`, where the “C-shaped” emission
+:cite:`PickeringEA1998`. Those profiles have recently been
+revised by :cite:`OttEA2010`, where the “C-shaped” emission
 profile is replaced by a “backward-C” shaped profile, and is now the
 default distribution in the Oslo CTM3.
 
-The vertical distribution :raw-latex:`\citep{OttEA2010}` needs different
+The vertical distribution :cite:`OttEA2010` needs different
 geographic regions to be defined, and these are taken from
-:raw-latex:`\citet{AllenEA2010}`. The vertical profiles are scaled to
+:cite:`AllenEA2010`. The vertical profiles are scaled to
 match the height of the convective plumes, as found in the
 meteorological data.
 
 When the Oslo CTM3 was in its early start, UCI CTM used a different
-vertical distribution, namely by :raw-latex:`\citet{StockwellEA1999}`.
+vertical distribution, namely by :cite:`StockwellEA1999`.
 This treatment placed lightning emissions too low in the atmosphere, and
 should not be used.
 
@@ -5156,7 +5156,7 @@ several years should be used, to create a climatological mean.
 
 This calculation is already done in the lightning subroutine
 *lightning.f90*. Accumulated flash rates for land and ocean are
-calculated using the original :raw-latex:`\citet{PriceRind1992}`
+calculated using the original :cite:`PriceRind1992`
 equations scaled to grid box averages, i.e. Eq. ([eq:litfreqPR]), and
 from these the scaling factors are calculated. Running average values
 are printed to screen at the last meteorological time step of each day,
@@ -5344,7 +5344,7 @@ EDGARv4.2 has no monthly variation; it is annual mean.
 Lamarque/IPCC
 ~~~~~~~~~~~~~
 
-:raw-latex:`\citet{LamarqueEA2010}` anthropogenic emissions
+:cite:`LamarqueEA2010` anthropogenic emissions
 *Ltracer\_emis\_lamarque.dat*.
 
 The Lamarque dataset has a monthly variation.
@@ -5360,7 +5360,7 @@ RETRO
 ~~~~~
 
 RETRO anthropogenic emissions, combined with POET natural emissions
-:raw-latex:`\citep{GranierEA2005,POETreport2}`, can be found in
+:cite:`GranierEA2005`, :cite:`POETreport2`, can be found in
 *Ltracer\_emis\_retro.dat* in *tables/EMISSION\_LISTS/*.
 
 This dataset has a monthly variation.
@@ -5375,7 +5375,7 @@ CH\ :math:`_4` emissions Bousquet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Through the project GAME, a dataset of CH\ :math:`_4` emissions, based
-on :raw-latex:`\citet{BousquetEA2011}` was generated:
+on :cite:`BousquetEA2011` was generated:
 *Ltracer\_emis\_ch4\_bousquet.dat*.
 
 Keep in mind that this dataset also includes biomass burning, so you
@@ -5411,7 +5411,7 @@ QSSA chemical integrator
 
 The numerical integration of chemical kinetics is done applying the
 Quasi Steady State Approximation (QSSA) introduced by
-:raw-latex:`\citet{HesstvedtEA1978}`, using three different integration
+:cite:`HesstvedtEA1978`, using three different integration
 methods depending on the chemical lifetime of the species, to save
 computing time.
 
@@ -5488,7 +5488,7 @@ through a column. It is turned on by setting ``TROPCHEM :=Y`` in the
 user specified section of *Makefile*.
 
 The tropospheric chemistry was first introduced in the CTM-1
-:raw-latex:`\citep{BerntsenIsaksen1997}`, and in its general form it
+:cite:`BerntsenIsaksen1997`, and in its general form it
 contains 46 components given in Table [table:tropcomp]. Originally there
 were 51 species, but 2 were not used (nr 26:
 CH\ :math:`_2`\ O\ :math:`_2`\ OH and nr 47: DMS, which has a new number
@@ -5666,7 +5666,7 @@ Without stratospheric chemistry; O\ :math:`_3`, NOx and HNO\ :math:`_3`
 O\ :math:`_3`, NOx and HNO\ :math:`_3` are very important in the
 stratosphere, and are transported down into the troposphere. In
 Oslo CTM2 a flux of O\ :math:`_3` was set in the uppermost model layer
-(the SynOz approach, :raw-latex:`\citet{McLindenEA2000}`), but this is
+(the SynOz approach, :cite:`McLindenEA2000`), but this is
 only possible for L40 vertical resolution. We have left this behind, and
 now use a climatology calculated from a full-chemistry T42L60 simulation
 for the years 2000–2008.
@@ -5832,10 +5832,10 @@ when stratospheric H\ :math:`_2`\ O is calculated
 field.
 
 The stratospheric chemistry was originally based on the Oslo 2D model
-:raw-latex:`\citep{StordalEA1985}`, later included in the stratospheric
+:cite:`StordalEA1985`, later included in the stratospheric
 3D model Oslo SCTM-1
-:raw-latex:`\citep{Rummukainen1996,RummukainenEA1999}` before included
-in the Oslo CTM2 :raw-latex:`\citep{Gauss2003, SovdeEA2008}`.
+:cite:`Rummukainen1996`, :cite:`RummukainenEA1999` before included
+in the Oslo CTM2 :cite:`Gauss2003`, :cite:`SovdeEA2008`.
 
 Technical information
 ---------------------
@@ -5867,7 +5867,7 @@ hydrogen, denoted sumH2, as:
    \textrm{H$_2$O} = \textrm{sumH$_2$} - 2\textrm{CH$_4$}
                         - \textrm{H$_2$}\label{sumh2}
 
- where sumH\ :math:`_2` = 7.72ppmv :raw-latex:`\citep{ZogerEA1999}`. The
+ where sumH\ :math:`_2` = 7.72ppmv :cite:`ZogerEA1999`. The
 old sum was 6.97ppmv, which was slightly low, although the difference
 did not change the chemistry much.
 
@@ -5931,7 +5931,7 @@ Microphysics
 The microphysics scheme calculates the formation and evolution of polar
 stratospheric clouds (PSCs). It is a column model, which fits very well
 into the IJ-block structure. The microphysics are explained in detail by
-:raw-latex:`\citet{SovdeEA2008}`, but will be included here as well.
+:cite:`SovdeEA2008`, but will be included here as well.
 
 You can turn off PSC heterogeneous chemistry by the logical ``LPSC`` in
 *psc\_microphysics.f90*, where you also can turn off heterogeneous
@@ -5955,7 +5955,7 @@ H\ :math:`_2`\ SO\ :math:`_4` is not calculated as a species in the
 stratosphere, it is computed from an existing background aerosol
 distribution (see Section [sxn:stratchem\_hetchem]), assuming some
 content of H\ :math:`_2`\ SO\ :math:`_4` (see
-:raw-latex:`\citet{SovdeEA2008}` for more). As explained in the
+:cite:`SovdeEA2008` for more). As explained in the
 following text, the background aerosol surface area may be modified by
 the microphysics scheme, and to keep the consistency, the amount of
 sulfuric acid is always computed from the original satellite data.
@@ -5970,9 +5970,9 @@ sulfuric acid is always computed from the original satellite data.
 | **Formation**
 | Given an amount of HNO\ :math:`_3`, H\ :math:`_2`\ SO\ :math:`_4` and
   H\ :math:`_2`\ O, the composition of a ternary solution is calculated
-  according to :raw-latex:`\citet{CarslawEA1995}`. This includes
+  according to :cite:`CarslawEA1995`. This includes
   HNO\ :math:`_3` freezing on ice assuming 3K supercooling below
-  :math:`T_{ICE}` from :raw-latex:`\citet{MartiMauersberger1993}`:
+  :math:`T_{ICE}` from :cite:`MartiMauersberger1993`:
 
   .. math:: T_{ICE} = \frac{2663.5}{12.537 - \log_{10}p_{H_2O}}
 
@@ -5981,7 +5981,7 @@ sulfuric acid is always computed from the original satellite data.
 The formed particle is treated as background aerosols (temporarily
 overwriting the background aerosol satellite data) unless the
 temperature is below :math:`T_{NAT}` given by
-:raw-latex:`\citet{HansonMauersberger1988}` for pressures in Torr:
+:cite:`HansonMauersberger1988` for pressures in Torr:
 
 .. math::
 
@@ -6001,30 +6001,30 @@ a temperature
 
  where the pressures are in Torr. This expression is close to the
 freezing temperature SAT:MixH reported by
-:raw-latex:`\citet{FoxEA1995}`, of a mixture of SAT
+:cite:`FoxEA1995`, of a mixture of SAT
 (H:math:`_2`\ SO\ :math:`_4\cdot`\ 4H\ :math:`_2`\ O) and
 HNO\ :math:`_3\cdot` H\ :math:`_2`\ SO\ :math:`_4\cdot`
 5H\ :math:`_2`\ O. :math:`T_{FRZ}` is in general 3-6K lower than
 :math:`T_{NAT}`, in agreement with several studies
-:raw-latex:`\citep[e.g.][]{VoigtEA2005}`. The particle is then assumed
+:cite:`VoigtEA2005`. The particle is then assumed
 to be nitric acid trihydrate (NAT, or PSC1a). Once formed, the NAT will
 stay NAT until it melts at the temperature reported by
-:raw-latex:`\citet{ZhangEA1993}`:
+:cite:`ZhangEA1993`:
 
 .. math:: T_{MELT} = \frac{3236}{11.502 - \log_{10}p_{H_2O}}
 
  where :math:`p_{H_2O}` is in Torr.
 
-:raw-latex:`\citet{SovdeEA2011}` let the NAT particles grow, also
+:cite:`SovdeEA2011` let the NAT particles grow, also
 letting the volume of PSCs grow without a limit, whereas the original
-treatment in :raw-latex:`\citet{SovdeEA2008}` used a volume limit as in
+treatment in :cite:`SovdeEA2008` used a volume limit as in
 the routine it was based on. We keep this limit in Oslo CTM3 because
 otherwise the particle area density will grow too large. This was never
 an issue in the Antarctic, but made too large PSCs when modelling the
 2011 Arctic spring.
 
 | **Sedimentation**
-| Sedimentation is done according to :raw-latex:`\citet{Kasten1968}` for
+| Sedimentation is done according to :cite:`Kasten1968` for
   each size bin in the log-normal size distributions.
 
 Heterogeneous chemistry
@@ -6097,7 +6097,7 @@ in *fastjx.f90*.
 Linoz
 -----
 
-Linoz v2 :raw-latex:`\citep{McLindenEA2000}` is included in the file
+Linoz v2 :cite:`McLindenEA2000` is included in the file
 *p-linoz.f*. However, the Oslo CTM3 is not set up to use this instead of
 stratospheric chemistry, only as part of the STE diagnostic tool
 (Section [sxn:ste]).
@@ -6109,7 +6109,7 @@ Photochemistry
 ==============
 
 The photodissociation rates (J-values) are calculated on-line using the
-fast-JX method, version 6.7c :raw-latex:`\citep{PratherFastJX67c}`.
+fast-JX method, version 6.7c :cite:`PratherFastJX67c`.
 fast-JX calculates dissociation rates in the troposphere and
 stratosphere. When treating only the troposphere, there are 20 values
 calculated, and for the stratospheric application there are 49. The
@@ -6201,7 +6201,7 @@ false, the result will be the classic average cloud cover as in
 Oslo CTM2. The default treatment is ``LCLDRANA``.
 
 The treatment of overlapping clouds is described by
-:raw-latex:`\citet{NeuEA2007}`, and is also described shortly below.
+:cite:`NeuEA2007`, and is also described shortly below.
 
 Average cloud cover
 ~~~~~~~~~~~~~~~~~~~
@@ -6210,7 +6210,7 @@ Average cloud cover means that clouds covering a fraction of a gridbox
 is averaged to a cloud covering the whole grid box. E.g. a convective
 cloud with optical depth of 20 covering 20% of the grid box, will be
 treated as a cloud covering the whole grid box by an optical depth of 4.
-:raw-latex:`\citet{NeuEA2007}` showed that this is not a good
+:cite:`NeuEA2007` showed that this is not a good
 approximation.
 
 Random cloud cover
@@ -6219,7 +6219,7 @@ Random cloud cover
 Clouds with cloud fraction (CF) less than 1 does not cover the whole
 grid box. They may be located at different places and they may overlap.
 There are two main types of treating this overlap; random and
-maximum-random overlap :raw-latex:`\citep{NeuEA2007}`.
+maximum-random overlap :cite:`NeuEA2007`.
 
 In the Oslo CTM3 the calculations are carried out over
 ``NDGRD``\ =\ ``IDGRDxJDGRD`` columns of cloud properties.
@@ -6236,7 +6236,7 @@ assumed to form a maximum-overlap group.
 
 For each maximum-overlap group, the number of possible combinations of
 columns are calculated. These are the independent cloud atmospheres,
-ICAs). In this process, as described by :raw-latex:`\citet{NeuEA2007}`,
+ICAs). In this process, as described by :cite:`NeuEA2007`,
 the total number of ICAs has been reduced by grouping cloud fractions
 into bins (there are ``CBIN_`` of them (set in *cmn\_fjx.f90*).
 
@@ -6253,12 +6253,12 @@ QA(3): 4-30 (stratus)
 
 QA(4): >30 (cumulus)
 
-For further reading see :raw-latex:`\citet{NeuEA2007}`. As a general
+For further reading see :cite:`NeuEA2007`. As a general
 user, your choices are to set the *LxxCTM.inp* switches, which are:
 
 | **``LCLDQMD``**
 | Use mid-point of quadrature cloud cover ICAs. This is the original
-  method published by the UCI group :raw-latex:`\citep{NeuEA2007}`. It
+  method published by the UCI group :cite:`NeuEA2007`. It
   generates all the possible max-ran overlap cloud profiles, then sorts
   them in order of increasing optical depth (OD), and breaks those into
   4 groups based on the standard breakpoints defined above.
@@ -6326,8 +6326,8 @@ Generating cross sections
 A program is available on Prather’s web page, that allows you to
 generate cross sections. You only need to write your own small
 subroutine, which should be fairly easy after looking at the existing
-ones. You will need to look up JPL :raw-latex:`\citep{jpl06-2,jpl10-06}`
-or IUPAC :raw-latex:`\citep{IUPACweb}` to get the data needed. You can
+ones. You will need to look up JPL :cite:`jpl06-2`, :cite:`jpl10-06`
+or IUPAC :cite:`IUPACweb` to get the data needed. You can
 also find a version of this program in the utilities repository (see
 Appendix [app:repository]).
 
@@ -6386,7 +6386,7 @@ FJ\_phase
 ~~~~~~~~~
 
 This is the generator I got from UCI, originating from
-:raw-latex:`\citet{HansenTravis1974}`. The process is as follows:
+:cite:`HansenTravis1974`. The process is as follows:
 
 Compile *mie.for*.
 
@@ -6435,7 +6435,7 @@ distributions.
 
 | ``NSD``
 | Size distribution type. All are described in
-  :raw-latex:`\citet{HansenTravis1974}`.
+  :cite:`HansenTravis1974`.
 
 -  Two-parameter Gamma function.
 
@@ -6568,7 +6568,7 @@ Mishchenko spher.f
 There are several codes for scattering available online at Mike
 Mishchenko’s web page at GISS. His code for spherical aerosols is given
 in the *spher.f*, and is clearly based on the same source as
-``FJ_phase``, the work of :raw-latex:`\citet{HansenTravis1974}`. This
+``FJ_phase``, the work of :cite:`HansenTravis1974`. This
 program is very well documented in the program file.
 
 As already noted, you can find this code in the utilities of the SVN
@@ -6600,7 +6600,7 @@ Sulphur module
 
 The tropospheric sulphur chemistry is turned on by setting
 ``SULPHUR :=Y`` in the user specified section of *Makefile*. It is
-documented by :raw-latex:`\citet{BerglenEA2004}`.
+documented by :cite:`BerglenEA2004`.
 
 To run this application you need to include at least the tropospheric
 chemistry module. The scheme needs 5 additional tracers, which are
@@ -6643,21 +6643,21 @@ emissions actually cover your simulation period.
 
 No information is available on H\ :math:`_2`\ S emissions from
 vegetation and soil, but they could be as described by
-:raw-latex:`\citet{BerglenEA2004}`.
+:cite:`BerglenEA2004`.
 
 DMS from ocean is parameterized as in
-:raw-latex:`\citet{NightingaleEA2000}`, where the DMS ocean
+:cite:`NightingaleEA2000`, where the DMS ocean
 concentration for each month is taken from
-:raw-latex:`\citet{KettleAndreae2000}`, a climatology based on
+:cite:`KettleAndreae2000`, a climatology based on
 observations. The Kettle climatology for DMS was updated in 2010 by
-:raw-latex:`\citet{LanaEA2011}`, and this field is now also available.
+:cite:`LanaEA2011`, and this field is now also available.
 The updated climatology should be tested before it is used extensively.
 Also see Section [sxn:emissions\_stv].
 
 In the Oslo CTM3 this climatology is given in the variable
 ``DMSseaconc``, and is converted from units of nM (i.e. nmole/L) to
 kg/m. This is further converted to a flux using the parameterisation of
-:raw-latex:`\citet{NightingaleEA2000}`, based on wind speed from the
+:cite:`NightingaleEA2000`, based on wind speed from the
 meteorological data. The flux calculation is carried out in the
 ``SOURCE`` or ``emis4chem`` routine.
 
@@ -6669,11 +6669,11 @@ when calculating photochemical reaction rates.
 
 Particles are assumed to be of log-normal size distribution, with dry
 radius of 0.05\ :math:`\mu`\ m and :math:`\sigma=2`, and will grow due
-to relative humidity according to :raw-latex:`\citet{Fitzgerald1975}`.
+to relative humidity according to :cite:`Fitzgerald1975`.
 
 Optical properties are found in *FJX\_UMaer.dat*, in the entry
 ``GM_SO4``. Refractive indices used for calculating these data are for
-ammonium sulphate according to :raw-latex:`\citet{ToonEA1976}`, and the
+ammonium sulphate according to :cite:`ToonEA1976`, and the
 value at 200nm is set to be equal to 300nm, in lack of measurements
 below 300nm.
 
@@ -6681,7 +6681,7 @@ Black carbon and organic matter
 ===============================
 
 The black carbon and organic matter (BC/OM) application
-:raw-latex:`\citep{BerntsenEA2006}` is turned on by setting ``BCOC :=Y``
+:cite:`BerntsenEA2006` is turned on by setting ``BCOC :=Y``
 in the user specified section of *Makefile*.
 
 This application is a stand-alone part of the Oslo CTM3 and needs the
@@ -6734,14 +6734,14 @@ to wash-out.
 Further, the insoluble species are transformed to soluble species after
 given *aging times*. The aging times are dependent on latitude and
 season, based on a simulation with the M7 application in the
-Oslo CTM2 :raw-latex:`\citep{SkeieEA2011,LundBerntsen2012}`. These are
+Oslo CTM2 :cite:`SkeieEA2011`, :cite:`LundBerntsen2012`. These are
 read from file in ``bcoc_chetinit`` in *bcoc\_oslo.f90* , and stored in
 the array ``CHET``. Input data is T42, which is interpolated to the
 model resolution.
 
 BC can be deposited on snow, thereby changing the albedo of snow.
 A module for calculating BC on snow
-:raw-latex:`\citep{RypdalEA2009, SkeieEA2011}` is included in
+:cite:`RypdalEA2009`, :cite:`SkeieEA2011` is included in
 Oslo CTM3 (BCsnow, Section [sxn:bcsnow]).
 
 BC/OM emissions
@@ -6759,7 +6759,7 @@ In addition, organic matter is emitted from the ocean, which is
 explained below.
 
 Several datasets are available for the non-oceanic anthropogenic
-emissions, such as :raw-latex:`\citet{BondEA2007}`. However, other
+emissions, such as :cite:`BondEA2007`. However, other
 inventories have recently become available, e.g. from the project
 ECLIPSE. Traditionally, fossil fuel and biofuel have been combined to
 one dataset, although recently it has become necessary to separate them.
@@ -6768,13 +6768,13 @@ Biomass burning is taken from Global Fire Emissions Database, which are
 distributed vertically according to the RETRO vertical distribution.
 
 Organic matter released from the ocean follows
-:raw-latex:`\citet{GanttEA2015}`, and is calculated in the file
+:cite:`GanttEA2015`, and is calculated in the file
 *emissions\_ocean.f90*.
 
 | **Important 1**
 | The is method is based on sea spray production, but the Oslo CTM3 sea
   spray function is not necessarily the same as in
-  :raw-latex:`\citet{GanttEA2015}`. You should make sure the
+  :cite:`GanttEA2015`. You should make sure the
   Oslo CTM3 does what you want it to.
 
 If the SALT module (Section [sxn:salt]) is included, sea spray is
@@ -6825,11 +6825,11 @@ is reduced, assuming that 20% of the grid box is available for
 scavenging. The 20% is somewhat arbitrary, but stems from the fact that
 these aerosols are scavenged by collision processes in rain, but in ice
 they are removed mainly by acting as ice nuclei
-:raw-latex:`\citep{BrowseEA2012}`. As will be explained below, we also
+:cite:`BrowseEA2012`. As will be explained below, we also
 apply the 20% on large scale ice for hydrophobic BC/OC, and hydrophobic
 BC is also fully subject to convective wet scavenging.
 
-Although :raw-latex:`\citet{BrowseEA2012}` suggested there should be no
+Although :cite:`BrowseEA2012` suggested there should be no
 large scale wet scavenging for temperatures below 258K, we also assume
 that 20% of the grid box aerosols can be subject for large scale ice
 scavenging. Convective scavenging is assumed to be rain, having no such
@@ -6866,7 +6866,7 @@ of fossil fuel origin (FF), biofuel (BF), or comes from biomass burning
 | BCFF
 | Dry aerosols, log-normal size distribution with radius
   0.012\ :math:`\mu`\ m, standard deviation :math:`\sigma=2`. Refractive
-  indices are from soot :raw-latex:`\citep{WCP112-86}`. Hydrophilic BCFF
+  indices are from soot :cite:`WCP112-86`. Hydrophilic BCFF
   is assumed to have 50% larger extinction coefficient, giving two
   entries in *FJX\_scat.dat*: ``31 GM_BCFF_PHOB`` and
   ``32 GM_BCFF_PHIL``.
@@ -6876,24 +6876,24 @@ of fossil fuel origin (FF), biofuel (BF), or comes from biomass burning
   :math:`r_1=0.08` and :math:`r_2=0.16`\ :math:`\mu`\ m, standard
   deviations :math:`\sigma_1=1.5` and :math:`\sigma_1=1.25`, and
   :math:`\Gamma=0.25/0.75`. Refractive indices are from the SAFARI
-  campaign :raw-latex:`\citep{HaywoodEA2003b, MyhreEA2003a}`. Entry in
+  campaign :cite:`HaywoodEA2003b`, :cite:`MyhreEA2003a`. Entry in
   *FJX\_scat.dat* is ``33 GM_BCOCBB``
 
 | OCFF
 | Dependent on relative humidity. Log-normal size distribution with
   radius 0.5\ :math:`\mu`\ m, and :math:`\sigma=2`. Refractive indices
-  are from ammonium sulphate :raw-latex:`\citep{ToonEA1976}`, and the
+  are from ammonium sulphate :cite:`ToonEA1976`, and the
   value at 200nm is set to be equal to 300nm, in lack of measurements
   below 300nm. Growth due to humidity follows
-  :raw-latex:`\citet{PengEA2001}`. Entry in *FJX\_UMaer.dat* is labeled
+  :cite:`PengEA2001`. Entry in *FJX\_UMaer.dat* is labeled
   ``GM_OCFF``.
 
 BC on snow – BCsnow
 -------------------
 
 The BCsnow module was first introduced by
-:raw-latex:`\citet{RypdalEA2009}` and later used by
-:raw-latex:`\citet{SkeieEA2011}`. It diagnoses the amount of BC
+:cite:`RypdalEA2009` and later used by
+:cite:`SkeieEA2011`. It diagnoses the amount of BC
 deposited on snow; it does not allow the deposited BC to get back into
 the atmosphere. When snow evaporates or melts, the BC is assumed to
 deposit on the ground and is thereby lost. Technically, it is a simple
@@ -6980,7 +6980,7 @@ Mineral dust
 ============
 
 The Dust Entrainment and Deposition (DEAD) Model
-:raw-latex:`\citep{ZenderEA2003}` has been coupled to the Oslo CTM3. You
+:cite:`ZenderEA2003` has been coupled to the Oslo CTM3. You
 include it by setting ``DUST =:Y`` in *Makefile*.
 
 Based on wind and surface properties, it calculates the vertical
@@ -7078,7 +7078,7 @@ program has not been compiled and used since around 2005.
 There are several erodibility maps available, as listed in the left
 column of Table [table:fdg], but not all should be used. The standard
 field for Oslo CTM3 should be ``bsn_mds_sqr``, as found by
-:raw-latex:`\citet{GriniEA2005}`, but it seems Oslo CTM2 has used
+:cite:`GriniEA2005`, but it seems Oslo CTM2 has used
 ``mbl_bsn_fct`` ever since, which is what Oslo CTM3 has inherited.
 
 It should be noted that in the DEAD code, the erodibility map is called
@@ -7151,12 +7151,12 @@ that overlap with model bin \ :math:`j`.
 
 There are two methods available for calculating the fluxes:
 
-Horizontal flux from :raw-latex:`\citet{White1979}` in subroutine
+Horizontal flux from :cite:`White1979` in subroutine
 ``flx_mss_hrz_slt_ttl_Whi79_get`` in *dstmblutl.F90*. Vertical flux from
-:raw-latex:`\citet{MarticorenaBergametti1995}` in routine
+:cite:`MarticorenaBergametti1995` in routine
 ``flx_mss_vrt_dst_ttl_MaB95_get`` (same file).
 
-Follows :raw-latex:`\citet{AlfaroGomes2001}`. **Should be checked
+Follows :cite:`AlfaroGomes2001`. **Should be checked
 against a more recent version of DEAD before use.**
 
 Option 1 is default, and to use Option 2 you have to include the
@@ -7257,12 +7257,12 @@ diameter is calculated, based on the bin sizes and mass median diameter
 deviation of the distribution (``gsd_anl``, same location). Default
 value for ``dmt_vma`` is 2.524\ :math:`\mu`\ m, with a standard
 deviation ``gsd_anl`` of 2. These numbers are supposedly taken from
-:raw-latex:`\citet{Shettle1984}`, but I could not manage to find it.
+:cite:`Shettle1984`, but I could not manage to find it.
 Zender has probably a copy if you need it.
 
 Particle density is assumed to be 2.6g/cm\ :math:`^3`, and refractive
 indices are taken from the SHADE campaign
-:raw-latex:`\citep{HaywoodEA2003a, MyhreEA2003b}`.
+:cite:`HaywoodEA2003a`, :cite:`MyhreEA2003b`.
 
 Mineral dust does not swell with increased humidity, so the scattering
 and absorbing properties are listed in the file *FJX\_scat.dat*, having
@@ -7350,11 +7350,11 @@ Sea salt
 ========
 
 The sea salt application was introduced by
-:raw-latex:`\citet{GriniEA2002}`. It is an independent application which
+:cite:`GriniEA2002`. It is an independent application which
 can be included in any transport model.
 
 In the Oslo CTM3, the salt code is located in the file *seasalt.f90*. It
-is primarily based on :raw-latex:`\citet{Fitzgerald1975}`.
+is primarily based on :cite:`Fitzgerald1975`.
 
 Sea salt production, however, is located in a separate module
 *seasaltprod.f90*, because it is used to calculate emissions of organic
@@ -7371,19 +7371,19 @@ The flux is calculated from the winds, and hence carried out every
 meteorological time step, by the subroutine ``seasalt_emis``. Several
 methods are available, set by ``SeaSaltScheme`` in *seasalt.f90*:
 
-:raw-latex:`\citet{MonahanEA1986}` for small particles, as suggested by
-:raw-latex:`\citet{GongEA1997}`, and :raw-latex:`\citet{SmithEA1993}`
+:cite:`MonahanEA1986` for small particles, as suggested by
+:cite:`GongEA1997`, and :cite:`SmithEA1993`
 for large particles. This is the default heritage from Oslo CTM2.
 
-:raw-latex:`\citet{MartenssonEA2003}`.
+:cite:`MartenssonEA2003`.
 
-:raw-latex:`\citet{GanttEA2015}`, i.e. :raw-latex:`\citet{Gong2003}`
+:cite:`GanttEA2015`, i.e. :cite:`Gong2003`
 with sea surface temperature adjustment as in
-:raw-latex:`\citet{JaegleEA2011}`.
+:cite:`JaegleEA2011`.
 
-:raw-latex:`\citet{WitekEA2016}`, i.e. :raw-latex:`\citet{SofievEA2011}`
+:cite:`WitekEA2016`, i.e. :cite:`SofievEA2011`
 without salinity effects, using sea surface temperature adjustment as in
-:raw-latex:`\citet{JaegleEA2011}`.
+:cite:`JaegleEA2011`.
 
 Seasalt flux is used to calculate emissions of organic matter from
 ocean, in *emissions\_ocean.f90*. Also see Section [sxn:bcoc\_emis] for
@@ -7442,9 +7442,9 @@ diameter in each bin).
 Salt particles will grow due to relative humidity, and optical
 properties are found in *FJX\_UMaer.dat*, where the entries are
 ``GM_SALT1`` to ``GM_SALT8``. The growth follows
-:raw-latex:`\citet{Fitzgerald1975}`, and refractive indices used for
+:cite:`Fitzgerald1975`, and refractive indices used for
 calculating these data are taken from
-:raw-latex:`\citet{ShettleFenn1979}` and :raw-latex:`\citet{hitran2k}`.
+:cite:`ShettleFenn1979` and :cite:`hitran2k`.
 
 Salt budgets
 ------------
@@ -7478,7 +7478,7 @@ Nitrate
 =======
 
 Aerosol nitrate can be simulated with the equilibrium module developed
-by :raw-latex:`\citet{MetzgerEA2002}`. In the Oslo CTM3 it needs to be
+by :cite:`MetzgerEA2002`. In the Oslo CTM3 it needs to be
 run together with tropospheric chemistry (Section [sxn:tropchem]),
 sulphate module (Section [sxn:sulphur]) and the SALT module (Section
 [sxn:salt]). These must be turned on in the user section in *Makefile*.
@@ -7625,12 +7625,12 @@ Nitrate emissions
 -----------------
 
 The nitrate application needs emissions of NH\ :math:`_3`. Different
-datasets are available, e.g. GEIA :raw-latex:`\citep{BouwmanEA1997}`
+datasets are available, e.g. GEIA :cite:`BouwmanEA1997`
 which has traditionally been used in Oslo CTM2. However, newer sets are
-also available, e.g. from :raw-latex:`\citet{LamarqueEA2010}`. While the
+also available, e.g. from :cite:`LamarqueEA2010`. While the
 latter covers only anthropogenic emissions, the GEIA data covers both
 anthropogenic and natural emissions, given on 1x1 resolution on an
-annual basis. Following :raw-latex:`\citet{AdamsEA1999}`, we impose
+annual basis. Following :cite:`AdamsEA1999`, we impose
 a monthly variation on three datasets by weighting emissions by the
 number of daylight hours during the year: Domestic animals, fertilizers,
 and crops sources.
@@ -7658,7 +7658,7 @@ Remaining problems
 ------------------
 
 The dry deposition of NH\ :math:`_3` is set to some numbers found in an
-old paper by :raw-latex:`\citet{SortebergHov1996}`. There seems to be
+old paper by :cite:`SortebergHov1996`. There seems to be
 agreement that drydep velocities of NH\ :math:`_3` should exceed
 velocities of NH\ :math:`_4^+`, but it is unclear by how much. The new
 dry deposition scheme (Section [sxn:drydep]) may improve this.
@@ -7692,21 +7692,21 @@ Secondary organic aerosols (SOA)
 ================================
 
 Secondary organic aerosols (SOA) was implemented in Oslo CTM2 by
-:raw-latex:`\citet{HoyleEA2007}`, and utilised later in
-e.g. :raw-latex:`\citet{HoyleEA2009}`.
+:cite:`HoyleEA2007`, and utilised later in
+e.g. :cite:`HoyleEA2009`.
 
 Several precursor hydrocarbons are included (Section [sxn:soa\_prec]).
 The precursors also react within the tropospheric gas phase chemistry,
 oxidised by OH, O\ :math:`_3` and NO\ :math:`_3`, forming SOA gas phase
 components (Section [sxn:soa\_tracers]). A separate module calculates
 SOA from an equilibrium approach, as explained in
-:raw-latex:`\citet{HoyleEA2007}`.
+:cite:`HoyleEA2007`.
 
 Stochiometric coefficients are used for the chemical products, based on
-a two-product model :raw-latex:`\citep{HoffmannEA1997}`, and the
+a two-product model :cite:`HoffmannEA1997`, and the
 partitioning (or separation) between the gas and aerosol phases is
 calculated assuming equilibrium and using partitioning coefficients
-:raw-latex:`\citep{HoyleEA2007}`.
+:cite:`HoyleEA2007`.
 
 Importantly, in Oslo CTM3 we do the separation in both the troposphere
 and the stratosphere, but the chemical conversion from precursors is
@@ -7770,7 +7770,7 @@ The SOA tracers are several gas components ``SOAGASxy``, where ``x`` is
 the class number (1–8), and ``y`` is the oxidising component (1–3,
 :math:`O_3`, OH, NO\ :math:`_3`). Similarly, there are aerosol
 components ``SOAAERxy``. These components have component IDs between 150
-and 191. See :raw-latex:`\citet{HoyleEA2007}` for more information.
+and 191. See :cite:`HoyleEA2007` for more information.
 
 SOA sources and sinks
 ---------------------
@@ -7828,12 +7828,12 @@ PVU based tropopause
 ~~~~~~~~~~~~~~~~~~~~
 
 First, the tropopause level is not allowed to have potential temperature
-higher than 380K :raw-latex:`\citep{HoltonEA1995}`. The uppermost layer
+higher than 380K :cite:`HoltonEA1995`. The uppermost layer
 having potential temperature below 380K is called ``L380K``.
 
 Traversing downwards from ``L380K``, the tropopause (top layer of
 troposphere) is defined at the level where the PVU (10\ :math:`^6`\ PV)
-is lower than 2.5PVU :raw-latex:`\citep{HoltonEA1995}`, but not lower
+is lower than 2.5PVU :cite:`HoltonEA1995`, but not lower
 than 5km (a somewhat arbitrary value, not often encountered). If the
 maximum PVU is lower than this limit (typical for low latitudes) the
 tropopause is defined at ``L380K``; the upper-most level where potential
@@ -7868,7 +7868,7 @@ Lapse rate based on E90 tracer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The tropopause defined by the E90 tracer
-:raw-latex:`\citep{PratherEA2011}` can be used if the E90 tracer is
+:cite:`PratherEA2011` can be used if the E90 tracer is
 included. It is the uppermost level where the 3D ``LSTRATAIR_E90`` is
 ``.false.`` (i.e. tropospheric air), as given by the variable
 ``LPAUZTOP``.
@@ -7889,7 +7889,7 @@ Equivalent latitude
 
 In the physics module (in the file *physics\_oslo.f90*) we also
 calculate equivalent latitude. Equivalent latitude is calculated from
-PVU according to :raw-latex:`\citet{NashEA1996}`, based upon the fact
+PVU according to :cite:`NashEA1996`, based upon the fact
 that PV is assumed to be conserved on potential temperature
 (:math:`\theta`) surfaces. All necessary parameters and variables are
 defined in the physics module.
@@ -8056,7 +8056,7 @@ Leaf area index
 
 The leaf area index (LAI) in Oslo CTM3 is actually green leaf area
 index, but we still call it ``LAI``. It is taken from ISLSCP2, FASIR
-adjusted, in 0.25 degree resolution, :raw-latex:`\citep{SietseEA2010}`.
+adjusted, in 0.25 degree resolution, :cite:`SietseEA2010`.
 The field is interpolated to Oslo CTM3 resolution.
 
 The path to the file is set in the input file, along with the year to
@@ -8069,7 +8069,7 @@ Roughness length
 ----------------
 
 The roughness length (``ZOI``) is taken from ISLSCP2, FASIR adjusted, in
-0.25 degree resolution, :raw-latex:`\citep{SietseEA2010}`. The field is
+0.25 degree resolution, :cite:`SietseEA2010`. The field is
 interpolated to Oslo CTM3 resolution.
 
 The path to the file is set in the input file, along with the year to
@@ -8238,14 +8238,14 @@ tendencies calendar (``JDO_T``) in the input file.
 e90 tracer
 ~~~~~~~~~~
 
-:raw-latex:`\citet{PratherEA2011}` presented a tracer that with given
+:cite:`PratherEA2011` presented a tracer that with given
 surface emissions and an e-folding atmospheric lifetime of 90days, will
 follow the observed tropopause closely at about 90ppbv.
 
 This is used to set the 3D logical variable ``LSTRATAIR_E90``, where
 ``.true.`` is stratospheric air. It uses a specific volume mixing ratio
 for the E90 tracer, given by ``E90VMR_TP``
-:raw-latex:`\citep{PratherEA2011}`.
+:cite:`PratherEA2011`.
 
 You can turn this tracer on in *Makefile*.
 
@@ -8260,7 +8260,7 @@ Stratosphere-Troposphere-Exchange
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In Oslo CTM3 the stratosphere-troposphere-exchange (STE) calculation
-follows :raw-latex:`\citet{HsuEA2005}`, and requires that the e90 tracer
+follows :cite:`HsuEA2005`, and requires that the e90 tracer
 is included (Section [sxn:e90]). STE is calculated based on the
 calculated O\ :math:`_3`, with the possibility to also calculate STE for
 a Linoz O\ :math:`_3` tracer.
@@ -8268,7 +8268,7 @@ a Linoz O\ :math:`_3` tracer.
 During a certain time period in Oslo CTM3 (e.g. a month), STE of
 O\ :math:`_3` is calculated as a residual of column mass budgets between
 the model surface and a certain O\ :math:`_3` isopleth
-:raw-latex:`\citep{HsuEA2005}`. Below the given isopleth and for the
+:cite:`HsuEA2005`. Below the given isopleth and for the
 given time period, this can be written
 
 .. math::
@@ -8301,12 +8301,12 @@ right-hand side terms (except :math:`F_{s\rightarrow t}`) are summed up
 for all time steps during the time period.
 
 Note that this is the same treatment as used by
-:raw-latex:`\citet{StevensonEA2006}`; but instead of separating the
+:cite:`StevensonEA2006`; but instead of separating the
 :math:`P` and :math:`L` terms for tropospheric O\ :math:`_3` (which is
 somewhat arbitrary and often based on a concept of odd-oxygen) we
 diagnose the sum :math:`P-L` as :math:`(dM/dt)_{chem}` in Eq ([eqn:ste])
 and the deposition :math:`D` as :math:`S`. Assuming no tropospheric
-trend, as in :raw-latex:`\citet{StevensonEA2006}`, means that
+trend, as in :cite:`StevensonEA2006`, means that
 :math:`(dM/dt)_{tot} + F_{t\rightarrow t} = 0` in our equation.
 
 The use of the 120ppb O\ :math:`_3` surface for calculating STE may be
@@ -8321,7 +8321,7 @@ A better diagnose is probably to use a surface independent of
 O\ :math:`_3`, such as the e90-stratosphere definition, as basis for
 Eq ([eqn:ste]). This is included in the CTM3, found to produce
 approximately similar STE as the 120ppb O\ :math:`_3` surface
-:raw-latex:`\citep{SovdeEA2012}`. Also for this diagnose air below 4km
+:cite:`SovdeEA2012`. Also for this diagnose air below 4km
 is assumed tropospheric.
 
 An additional possibility is to use Linoz O\ :math:`_3` tracer for STE
@@ -8532,9 +8532,9 @@ default).
 
 OH-average CO-kernel, Eq. ([eq:ohcokernel]), from surface to model top.
 
-:raw-latex:`\citet{SpivakovskyEA2000}`
+:cite:`SpivakovskyEA2000`
 
-:raw-latex:`\citet{LawrenceEA2001}`
+:cite:`LawrenceEA2001`
 
 Summing up throughout the domains listed above.
 
@@ -8941,7 +8941,7 @@ Table [table:parameters].
 +-----------------+--------------------------------+--------------------------------------------------------------------------------+
 | ``dLv_dT``      | ``-0.00237e6``                 | Gradient of Lv between 0C and 100C [(J/kg)/K]                                  |
 +-----------------+--------------------------------+--------------------------------------------------------------------------------+
-|                 |                                | :raw-latex:`\citep[Table C-5 in][]{Stull1988}`                                 |
+|                 |                                | :cite:`Stull1988`                                 |
 +-----------------+--------------------------------+--------------------------------------------------------------------------------+
 | ``TK_0C``       | 273.15                         | Temperature [K] at 0\ :math:`^{\circ}`\ C                                      |
 +-----------------+--------------------------------+--------------------------------------------------------------------------------+
@@ -9186,7 +9186,7 @@ dataset is used.
 ``LIGHTNING_OAS2015``: Default method for calculating L-NOx.
 
 ``LIGHTNING_GMD2012``: L-NOx as described by
-:raw-latex:`\citet{SovdeEA2012}`.
+:cite:`SovdeEA2012`.
 
 ``LIGHTNING_UCI2015``: L-NOx as used by UCI-CTM in 2015. I do not
 recommend using this.
@@ -9201,7 +9201,7 @@ proximity. Test routine to make land near-land lightning behaving like
 land. **Not used.**
 
 ``LIGHTNING_ALLEN2002``: L-NOx as described by
-:raw-latex:`\citet{AllenPickering2002}`. Not evaluated.
+:cite:`AllenPickering2002`. Not evaluated.
 
 *metdata\_ecmwf.f90*
 ~~~~~~~~~~~~~~~~~~~~
@@ -9252,7 +9252,7 @@ striding.
 
 Routines for calculating planetary boundary layer (PBL) mixing. This is
 the f90 version of the UCI file *p-pbl.f*, but modified to use the
-scheme by :raw-latex:`\citet{HoltslagEA1990}`.
+scheme by :cit:`HoltslagEA1990`.
 
 ``CNVBDL``: Main routine for calculating PBL mixing.
 
@@ -9262,11 +9262,11 @@ scheme by :raw-latex:`\citet{HoltslagEA1990}`.
 as done in the routine ``KPROF``.
 
 ``KPROF2``: Calculates diffusivity of heat used in PBL closure, as used
-by the :raw-latex:`\citet{HoltslagEA1990}` scheme. Should be used
+by the :cite:`HoltslagEA1990` scheme. Should be used
 instead of ``KPROF``, since unnecessary calculations have been removed.
 
 ``KPROF``: Calculates diffusitivities used in PBL closure, as used by
-the :raw-latex:`\citet{HoltslagEA1990}` scheme.
+the :cite:`HoltslagEA1990` scheme.
 
 ``PHIM``: Calculates similarity theory stability correction for
 momentum.
@@ -9340,7 +9340,7 @@ modifications from Oslo CTM3 are implemented.
 ``WASH1``: Simple UCI wet scavenging routine. Kept for history; should
 not be used.
 
-``WASH2``: Routine by :raw-latex:`\citet{NeuPrather2012}`, partly
+``WASH2``: Routine by :cite:`NeuPrather2012`, partly
 modified for Oslo CTM3.
 
 ``DISGAS``: Calculates the mass of tracer dissolved in aqueous phase.
@@ -9360,7 +9360,7 @@ and also evaporated from precipitation (kg).
 
 ``DIAMEMP``: Empirical fit of precipitation diameter to cloud water
 density and rain rate, following
-:raw-latex:`\citet{FieldHeymsfield2003}`.
+:cite:`FieldHeymsfield2003`.
 
 ``GAMMAX``: Calculates gamma using ln gamma algorithm.
 
@@ -10079,7 +10079,7 @@ stratosphere are listed.
 ``set_pr42het``: Sets aerosol surface uptake reaction for hydrolysis of
 N\ :math:`_2`\ O\ :math:`_5` in the troposphere. This aerosol
 climatology is an annual mean height-latitude distribution from
-:raw-latex:`\citep{DentenerCrutzen1993}`, and should be revised.
+:cite:`DentenerCrutzen1993`, and should be revised.
 
 ``getRQAER`` (private): Find removal rate by aerosol (``RQAER``), only
 dependent upon land/sea and vertical variation. Crude approximation,
@@ -10390,7 +10390,7 @@ emissions, but it has not been implemented yet.
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Contains routines for calculating MEGANv2.10 emissions
-:raw-latex:`\citep{GuentherEA2012}`. Oslo CTM3 routines are:
+:cite:`GuentherEA2012`. Oslo CTM3 routines are:
 
 ``megan_report``: reports daily totals of MEGAN. Should not be included
 as default.
@@ -10462,7 +10462,7 @@ temperature.
 ``LeafIROut``: IR thermal radiation energy output by leaf.
 
 ``LHV``: Calculate latent heat of vaporisation from
-:raw-latex:`\citet{Stull1988}`, p.641.
+:cite:`Stull1988`, p.641.
 
 ``LeafLE``: Latent energy term in energy balance.
 
@@ -10481,7 +10481,7 @@ sky.
 ``ExposedLeafIRin``: Calculate IR into leaf that is exposed to the sky.
 
 ``SOILNOX``: Calculation of soil NOx based on
-:raw-latex:`\citet{YiengerLevy1995}`.
+:cite:`YiengerLevy1995`.
 
 ``FERTLZ_ADJ``: Computes fertilizer adjustment factor for soil NOx.
 
@@ -10491,7 +10491,7 @@ sky.
 NOx.
 
 ``getPulseType``: Computes the pulse type from a rainfall rate
-:raw-latex:`\citep{YiengerLevy1995}`.
+:cite:`YiengerLevy1995`.
 
 ``precipfact``: Computes a precipitation adjustment factor.
 
@@ -10511,7 +10511,7 @@ climatology of those years.
 
 ``emissions_ocean_organiccarbon``: Calculate emissions of oceanic
 organic carbon aerosols (POA), following
-:raw-latex:`\citet{GanttEA2015}`. If sea salt module is included, use
+:cite:`GanttEA2015`. If sea salt module is included, use
 sea salt production rate, otherwise calculate it separately (slightly
 different method for now). This routine only depend on meteorological
 variables, and is called from ``update_emis_ii``
@@ -10651,7 +10651,7 @@ daily fraction of emissions per month.
 ~~~~~~~~~~~~~~~~~
 
 Subroutine ``eqsam_v03d_sub`` is the main nitrate (eqsam) driver, based
-on :raw-latex:`\citet{MetzgerEA2002}`.
+on :cite:`MetzgerEA2002`.
 
 *fallingaerosols.f90*
 ~~~~~~~~~~~~~~~~~~~~~
@@ -10662,7 +10662,7 @@ using second order moments transport. Not used yet.
 ``aerosolsettling``: Master routine.
 
 ``readkasten1968``: Reads aerosol fall speeds of
-:raw-latex:`\citet{Kasten1968}`.
+:cite:`Kasten1968`.
 
 ``getGAMAAER``: The vertical velocity of particles are found based on
 their radius. Assumes fixed radius for the whole IJ-block.
@@ -11026,17 +11026,17 @@ salt particles.
 are used by both the SALT application and the BCOC application.
 
 ``seasalt_production``: The standard Oslo CTM3 sea salt production,
-using small particles as in :raw-latex:`\citet{MonahanEA1986}` as
-suggested by :raw-latex:`\citet{GongEA1997}`, and large particles as in
-:raw-latex:`\citet{SmithEA1993}`.
+using small particles as in :cite:`MonahanEA1986` as
+suggested by :cite:`GongEA1997`, and large particles as in
+:cite:`SmithEA1993`.
 
 ``seasalt_production_maartenson03``: Sea salt production following
-:raw-latex:`\citet{MartenssonEA2003}`.
+:cite:`MartenssonEA2003`.
 
 ``seasalt_production_gantt15``: Sea salt production following
-:raw-latex:`\citet{GanttEA2015}`, i.e. parameterisation of
-:raw-latex:`\citet{Gong2003}` with sea surface temperature adjustment as
-in :raw-latex:`\citet{JaegleEA2011}`.
+:cite:`GanttEA2015`, i.e. parameterisation of
+:cite:`Gong2003` with sea surface temperature adjustment as
+in :cite:`JaegleEA2011`.
 
 *soa\_oslo.f90*
 ~~~~~~~~~~~~~~~
@@ -12742,9 +12742,9 @@ Reactions taken into account in the Oslo CTM3 are listed here, separated
 into photolytic reactions, bi-molecular reactions, tri-molecular
 reactions, and heterogeneous reactions.
 
-Listed are the JPL :raw-latex:`\citep{jpl06-2}` reaction numbers, that
+Listed are the JPL :cite:`jpl06-2` reaction numbers, that
 consist of a letter followed by number (e.g. A1), and the IUPAC
-:raw-latex:`\citep{IUPACweb}` numbers which use more letters to describe
+:cite:`IUPACweb` numbers which use more letters to describe
 the reaction. The numbering should be evident once you look at
 JPL/IUPAC.
 
@@ -13706,584 +13706,584 @@ a few older Oslo CTM1 papers at the end.
 
 Regional temperature change potentials for short-lived climate forcing
 based on radiative forcing from multiple models
-:raw-latex:`\citep{AamaasEA2017}`.
+:cite:`AamaasEA2017`.
 
 Investigation of global particulate nitrate from the AeroCom phase III
-experiment :raw-latex:`\citep{BianEA2017}`.
+experiment :cite:`BianEA2017`.
 
 Emission metrics for quantifying regional climate impacts of aviation
-:raw-latex:`\citep{LundEA2017b}`.
+:cite:`LundEA2017b`.
 
 Sensitivity of black carbon concentrations and climate impact to aging
-and scavenging in OsloCTM2-M7 :raw-latex:`\citep{LundEA2017a}`.
+and scavenging in OsloCTM2-M7 :cite:`LundEA2017a`.
 
 Multi-model simulations of aerosol and ozone radiative forcing due to
 anthropogenic emission changes during the period 1990-2015
-:raw-latex:`\citep{MyhreEA2017}`.
+:cite:`MyhreEA2017`.
 
 Aerosols at the poles: an AeroCom Phase II multi-model evaluation
-:raw-latex:`\citep{SandEA2017}`.
+:cite:`SandEA2017`.
 
 2016 – 11 papers
 ----------------
 
 Regional emission metrics for short-lived climate forcing from multiple
-models :raw-latex:`\citep{AamaasEA2016}`.
+models :cite:`AamaasEA2016`.
 
 Atmospheric methane evolution the last 40 years
-:raw-latex:`\citep{DalsorenEA2016}`.
+:cite:`DalsorenEA2016`.
 
 What controls the vertical distribution of aerosol? Relationships
 between process sensitivity in HadGEM3-UKCA and inter-model variation
-from AeroCom Phase II :raw-latex:`\citep{KiplingEA2016}`.
+from AeroCom Phase II :cite:`KiplingEA2016`.
 
 Evaluation of the aerosol vertical distribution in global aerosol models
 through comparison against CALIOP measurements: AeroCom phase II results
-:raw-latex:`\citep{KoffiEA2016}`.
+:cite:`KoffiEA2016`.
 
 Evaluation of observed and modelled aerosol lifetimes using radioactive
 tracers of opportunity and an ensemble of 19 global models
-:raw-latex:`\citep{KristiansenEA2016}`.
+:cite:`KristiansenEA2016`.
 
 Extensive release of methane from Arctic seabed west of Svalbard during
 summer 2014 does not influence the atmosphere
-:raw-latex:`\citep{MyhreEA2016}`.
+:cite:`MyhreEA2016`.
 
 Comparison of aerosol optical properties above clouds between POLDER and
 AeroCom models over the South East Atlantic Ocean during the fire season
-:raw-latex:`\citep{PeersEA2016}`.
+:cite:`PeersEA2016`.
 
 Radiative forcing from aircraft emissions of NOx: model calculations
 with CH4 surface flux boundary condition
-:raw-latex:`\citep{PitariEA2016}`.
+:cite:`PitariEA2016`.
 
 Multi-model evaluation of short-lived pollutant distributions over East
-Asia during summer 2008 :raw-latex:`\citep{QuennehenEA2016}`.
+Asia during summer 2008 :cite:`QuennehenEA2016`.
 
 The effect of future ambient air pollution on human premature mortality
 to 2100 using output from the ACCMIP model ensemble
-:raw-latex:`\citep{SilvaEA2016}`.
+:cite:`SilvaEA2016`.
 
 Global and regional radiative forcing from 20% reductions in BC, OC and
-SO4 - an HTAP2 multi-model study :raw-latex:`\citep{StjernEA2016}`.
+SO4 - an HTAP2 multi-model study :cite:`StjernEA2016`.
 
 2015 – 5 papers
 ---------------
 
 AMAP Assessment 2015: Methane as an Arctic climate forcing
-:raw-latex:`\citep{AMAP2015}`.
+:cite:`AMAP2015`.
 
 Current model capabilities for simulating black carbon and sulfate
 concentrations in the Arctic atmosphere: a multi-model evaluation using
 a comprehensive measurement data set
-:raw-latex:`\citep{EckhardtEA2015}`.
+:cite:`EckhardtEA2015`.
 
 Impact of coupled NOx-aerosol aircraft emissions on ozone photochemistry
-and radiative forcing :raw-latex:`\citep{PitariEA2015}`.
+and radiative forcing :cite:`PitariEA2015`.
 
 Measuring and Modeling the Lifetime of Nitrous Oxide including its
-Variability :raw-latex:`\citep{PratherEA2015}`.
+Variability :cite:`PratherEA2015`.
 
 Evaluating the climate and air quality impacts of short-lived pollutants
-:raw-latex:`\citep{StohlEA2015}`.
+:cite:`StohlEA2015`.
 
 2014 – 11 papers
 ----------------
 
 Forty-seven years of weekly atmospheric black carbon measurements in the
 Finnish Arctic: Decrease in black carbon with declining emissions
-:raw-latex:`\citep{DutkiewiczEA2014}`.
+:cite:`DutkiewiczEA2014`.
 
 Climate penalty for shifting shipping to the Arctic
-:raw-latex:`\citep{FuglestvedtEA2014}`.
+:cite:`FuglestvedtEA2014`.
 
 How shorter black carbon lifetime alters its climate effect
-:raw-latex:`\citep{HodnebrogEA2014}`.
+:cite:`HodnebrogEA2014`.
 
 Atmospheric Ozone and Methane in a Changing Climate
-:raw-latex:`\citep{IsaksenEA2014a}`.
+:cite:`IsaksenEA2014a`.
 
 An AeroCom assessment of black carbon in Arctic snow and sea ice
-:raw-latex:`\citep{JiaoEA2014}`.
+:cite:`JiaoEA2014`.
 
 Climate impacts of short-lived climate forcers versus CO2 from
 biodiesel: A case of the EU on-road sector
-:raw-latex:`\citep{LundEA2014a}`.
+:cite:`LundEA2014a`.
 
 Global and regional climate impacts of black carbon and co-emitted
-species from the on-road diesel sector :raw-latex:`\citep{LundEA2014b}`.
+species from the on-road diesel sector :cite:`LundEA2014b`.
 
 Modelled black carbon radiative forcing and atmospheric lifetime in
 AeroCom Phase II constrained by aircraft observations
-:raw-latex:`\citep{SamsetEA2014}`.
+:cite:`SamsetEA2014`.
 
 Aircraft emission mitigation by changing route altitude: A multi-model
 estimate of aircraft NOx emission impact on O3 photochemistry
-:raw-latex:`\citep{SovdeEA2014}`.
+:cite:`SovdeEA2014`.
 
 The AeroCom evaluation and intercomparison of organic aerosol in global
-models :raw-latex:`\citep{TsigaridisEA2014}`.
+models :cite:`TsigaridisEA2014`.
 
 The influence of future non-mitigated road transport emissions on
 regional ozone exceedences at global scale
-:raw-latex:`\citep{WilliamsEA2014}`.
+:cite:`WilliamsEA2014`.
 
 2013 – 20 papers
 ----------------
 
 Evaluation of ACCMIP outgoing longwave radiation from tropospheric ozone
-using TES satellite observations :raw-latex:`\citep{BowmanEA2013}`.
+using TES satellite observations :cite:`BowmanEA2013`.
 
 Environmental impacts of shipping in 2030 with a particular focus on the
-Arctic region :raw-latex:`\citep{DalsorenEA2013}`.
+Arctic region :cite:`DalsorenEA2013`.
 
 Reducing CO2 from shipping - do non-CO2 effects matter?
-:raw-latex:`\citep{EideEA2013}`.
+:cite:`EideEA2013`.
 
 Ozone Variations Derived by a Chemical Transport Model
-:raw-latex:`\citep{EleftheratosEA2013}`.
+:cite:`EleftheratosEA2013`.
 
 Elemental carbon measurements in European Arctic snow packs
-:raw-latex:`\citep{ForsstromEA2013}`.
+:cite:`ForsstromEA2013`.
 
 Improvements to the retrieval of tropospheric NO2 from satellite
 stratospheric correction using SCIAMACHY limb/nadir matching and
-comparison to Oslo CTM2 simulations :raw-latex:`\citep{HilbollEA2013}`.
+comparison to Oslo CTM2 simulations :cite:`HilbollEA2013`.
 
 Global Warming Potentials and Radiative Efficiencies of Halocarbons and
 Related Compounds: A Comprehensive Review
-:raw-latex:`\citep{HodnebrogEA2013}`.
+:cite:`HodnebrogEA2013`.
 
 Future methane, hydroxyl, and their uncertainties: key climate and
 emission parameters for future predictions
-:raw-latex:`\citep{HolmesEA2013}`.
+:cite:`HolmesEA2013`.
 
 Multi-model mean nitrogen and sulfur deposition from the Atmospheric
 Chemistry and Climate Model Intercomparison Project (ACCMIP): evaluation
 of historical and projected future changes
-:raw-latex:`\citep{LamarqueEA2013b}`.
+:cite:`LamarqueEA2013b`.
 
 The Atmospheric Chemistry and Climate Model Intercomparison Project
 (ACCMIP): overview and description of models, simulations and climate
-diagnostics :raw-latex:`\citep{LamarqueEA2013a}`.
+diagnostics :cite:`LamarqueEA2013a`.
 
 Evaluation of preindustrial to present-day black carbon and its albedo
 forcing from Atmospheric Chemistry and Climate Model Intercomparison
-Project (ACCMIP) :raw-latex:`\citep{LeeEA2013}`.
+Project (ACCMIP) :cite:`LeeEA2013`.
 
 Radiative forcing of the direct aerosol effect from AeroCom Phase II
-simulations :raw-latex:`\citep{MyhreEA2013}`.
+simulations :cite:`MyhreEA2013`.
 
 Preindustrial to present-day changes in tropospheric hydroxyl radical
 and methane lifetime from the Atmospheric Chemistry and Climate Model
-Intercomparison Project (ACCMIP) :raw-latex:`\citep{NaikEA2013}`.
+Intercomparison Project (ACCMIP) :cite:`NaikEA2013`.
 
 Comparison of spheroidal carbonaceous particle (SCP) data with modelled
 atmospheric black carbon concentration and deposition, and airmass
-sources in northern Europe, 1850-2010 :raw-latex:`\citep{RuppelEA2013}`.
+sources in northern Europe, 1850-2010 :cite:`RuppelEA2013`.
 
 Black carbon vertical profiles strongly affect its radiative forcing
-uncertainty :raw-latex:`\citep{SamsetEA2013}`.
+uncertainty :cite:`SamsetEA2013`.
 
 Radiative forcing in the ACCMIP historical and future climate
-simulations :raw-latex:`\citep{ShindellEA2013}`.
+simulations :cite:`ShindellEA2013`.
 
 Global premature mortality due to anthropogenic outdoor air pollution
 and the contribution of past climate change
-:raw-latex:`\citep{SilvaEA2013}`.
+:cite:`SilvaEA2013`.
 
 Tropospheric ozone changes, radiative forcing and attribution to
 emissions in the Atmospheric Chemistry and Climate Model
-Inter-comparison Project (ACCMIP) :raw-latex:`\citep{StevensonEA2013}`.
+Inter-comparison Project (ACCMIP) :cite:`StevensonEA2013`.
 
 Analysis of present day and future OH and methane lifetime in the ACCMIP
-simulations :raw-latex:`\citep{VoulgarakisEA2013}`.
+simulations :cite:`VoulgarakisEA2013`.
 
 Pre-industrial to end 21st century projections of tropospheric ozone
 from the Atmospheric Chemistry and Climate Model Intercomparison Project
-(ACCMIP) :raw-latex:`\citep{YoungEA2013}`.
+(ACCMIP) :cite:`YoungEA2013`.
 
 2012 – 8 papers
 ---------------
 
 Future air quality in Europe: a multi-model assessment of projected
-exposure to ozone :raw-latex:`\citep{ColetteEA2012}`.
+exposure to ozone :cite:`ColetteEA2012`.
 
-Global air quality and climate :raw-latex:`\citep{FioreEA2012}`.
+Global air quality and climate :cite:`FioreEA2012`.
 
 Future impact of traffic emissions on atmospheric ozone and OH based on
-two scenarios :raw-latex:`\citep{HodnebrogEA2012}`.
+two scenarios :cite:`HodnebrogEA2012`.
 
 Attribution of the Arctic ozone column deficit in March 2011
-:raw-latex:`\citep{IsaksenEA2012}`.
+:cite:`IsaksenEA2012`.
 
 Application of the CALIOP Layer Product to evaluate the vertical
 distribution of aerosols estimated by global models: Part 1. AeroCom
-phase I results :raw-latex:`\citep{KoffiEA2012}`.
+phase I results :cite:`KoffiEA2012`.
 
 Parameterization of black carbon aging in the OsloCTM2 and implications
 for regional transport to the Arctic
-:raw-latex:`\citep{LundBerntsen2012}`.
+:cite:`LundBerntsen2012`.
 
-The chemical transport model Oslo CTM3 :raw-latex:`\citep{SovdeEA2012}`.
+The chemical transport model Oslo CTM3 :cite:`SovdeEA2012`.
 
 Short-lived climate forcers from current shipping and petroleum
-activities in the Arctic :raw-latex:`\citep{OdemarkEA2012}`.
+activities in the Arctic :cite:`OdemarkEA2012`.
 
 2011 – 16 papers
 ----------------
 
 Inferring absorbing organic carbon content from AERONET data
-:raw-latex:`\citep{ArolaEA2011}`.
+:cite:`ArolaEA2011`.
 
 Observed and Modelled record ozone decline over the Arctic during
-winter/spring 2011 :raw-latex:`\citep{BalisEA2011}`.
+winter/spring 2011 :cite:`BalisEA2011`.
 
 Air quality trends in Europe over the past decade: a first multi-model
-assessment :raw-latex:`\citep{ColetteEA2011}`.
+assessment :cite:`ColetteEA2011`.
 
 A note on the comparison between total ozone from Oslo CTM2 and SBUV
-satellite data :raw-latex:`\citep{EleftheratosEA2011}`.
+satellite data :cite:`EleftheratosEA2011`.
 
 Future impact of non-land based traffic emissions on atmospheric ozone
 and OH - an optimistic scenario and a possible mitigation strategy
-:raw-latex:`\citep{HodnebrogEA2011}`.
+:cite:`HodnebrogEA2011`.
 
 A review of the anthropogenic influence on biogenic secondary organic
-aerosol :raw-latex:`\citep{HoyleEA2011b}`.
+aerosol :cite:`HoyleEA2011b`.
 
 Representation of tropical deep convection in atmospheric models - Part
-2: Tracer transport :raw-latex:`\citep{HoyleEA2011}`.
+2: Tracer transport :cite:`HoyleEA2011`.
 
 Global dust model intercomparison in AeroCom phase I
-:raw-latex:`\citep{HuneeusEA2011}`.
+:cite:`HuneeusEA2011`.
 
 Strong atmospheric chemistry feedback to climate warming from Arctic
-methane emissions :raw-latex:`\citep{IsaksenEA2011}`.
+methane emissions :cite:`IsaksenEA2011`.
 
 Radiative forcing due to changes in ozone and methane caused by the
-transport sector :raw-latex:`\citep{MyhreEA2011}`.
+transport sector :cite:`MyhreEA2011`.
 
 Representation of tropical deep convection in atmospheric models - Part
 1: Meteorology and comparison with satellite observations
-:raw-latex:`\citep{RussoEA2011}`.
+:cite:`RussoEA2011`.
 
 Vertical dependence of black carbon, sulphate and biomass burning
-aerosol radiative forcing :raw-latex:`\citep{SamsetMyhre2011}`.
+aerosol radiative forcing :cite:`SamsetMyhre2011`.
 
 Black carbon in the atmosphere and snow, from pre-industrial times until
-present :raw-latex:`\citep{SkeieEA2011}`.
+present :cite:`SkeieEA2011`.
 
 Anthropogenic radiative forcing time series from pre-industrial times
-until 2010 :raw-latex:`\citep{SkeieEA2011b}`.
+until 2010 :cite:`SkeieEA2011b`.
 
 The HNO3 forming branch of the HO2 + NO reaction:
 pre-industrial-to-present trends in atmospheric species and radiative
-forcings :raw-latex:`\citep{SovdeEA2011b}`.
+forcings :cite:`SovdeEA2011b`.
 
 Estimation of Arctic Ozone Loss in the Winter 2006/07 using a Chemical
-Transport Model and Data Assimilation :raw-latex:`\citep{SovdeEA2011}`.
+Transport Model and Data Assimilation :cite:`SovdeEA2011`.
 
 2010 – 4 papers
 ---------------
 
 Direct radiative effect of aerosols emitted by transport: from road,
-shipping and aviation :raw-latex:`\citep{BalkanskiEA2010}`.
+shipping and aviation :cite:`BalkanskiEA2010`.
 
 Impacts of the Large Increase in International Ship Traffic 2000-2007 on
-Tropospheric Ozone and Methane :raw-latex:`\citep{DalsorenEA2010}`.
+Tropospheric Ozone and Methane :cite:`DalsorenEA2010`.
 
 Transport impacts on atmosphere and climate: Aviation
-:raw-latex:`\citep{LeeEA2010}`.
+:cite:`LeeEA2010`.
 
 Transport impacts on atmosphere and climate: Land transport
-:raw-latex:`\citep{UherekEA2010}`.
+:cite:`UherekEA2010`.
 
 2009 – 13 papers
 ----------------
 
 Effect of emission changes in southeast Asia on global hydroxyl and
-methane levels :raw-latex:`\citep{DalsorenEA2009}`.
+methane levels :cite:`DalsorenEA2009`.
 
 Update on emissions and environmental impacts from the international
 fleet of ships: the contribution from major ship types and ports
-:raw-latex:`\citep{DalsorenEA2009b}`.
+:cite:`DalsorenEA2009b`.
 
 Transport impacts on atmosphere and climate: Shipping
-:raw-latex:`\citep{EyringEA2009}`.
+:cite:`EyringEA2009`.
 
 The impact of traffic emissions on atmospheric ozone and OH: results
-from QUANTIFY :raw-latex:`\citep{HoorEA2009}`.
+from QUANTIFY :cite:`HoorEA2009`.
 
 Anthropogenic influence on SOA and the resulting radiative forcing
-:raw-latex:`\citep{HoyleEA2009}`.
+:cite:`HoyleEA2009`.
 
 Present-day contribution of anthropogenic emissions from China to the
 global burden and radiative forcing of aerosol and ozone
-:raw-latex:`\citep{HoyleEA2009b}`.
+:cite:`HoyleEA2009b`.
 
 Atmospheric composition change: Climate-Chemistry interactions
-:raw-latex:`\citep{IsaksenEA2009}`.
+:cite:`IsaksenEA2009`.
 
 Evaluation of black carbon estimations in global aerosol models
-:raw-latex:`\citep{KochEA2009}`.
+:cite:`KochEA2009`.
 
 Modelled radiative forcing of the direct aerosol effect with
-multi-observation evaluation :raw-latex:`\citep{MyhreEA2009}`.
+multi-observation evaluation :cite:`MyhreEA2009`.
 
 Consistency Between Satellite-Derived and Modeled Estimates of the
-Direct Aerosol Effect :raw-latex:`\citep{Myhre2009}`.
+Direct Aerosol Effect :cite:`Myhre2009`.
 
 Modelling of chemical and physical aerosol properties during the ADRIEX
-aerosol campaign :raw-latex:`\citep{MyhreEA2009b}`.
+aerosol campaign :cite:`MyhreEA2009b`.
 
 The influence of foreign vs. North American emissions on surface ozone
-in the US :raw-latex:`\citep{ReidmillerEA2009}`.
+in the US :cite:`ReidmillerEA2009`.
 
 Costs and global impacts of black carbon abatement strategies
-:raw-latex:`\citep{RypdalEA2009}`.
+:cite:`RypdalEA2009`.
 
 2008 – 4 papers
 ---------------
 
 Climate forcing from the transport sectors
-:raw-latex:`\citep{FuglestvedtEA2009}`.
+:cite:`FuglestvedtEA2009`.
 
 Modeling of the solar radiative impact of biomass burning aerosols
 during the Dust and Biomass burning Experiment (DABEX)
-:raw-latex:`\citep{MyhreEA2008}`.
+:cite:`MyhreEA2008`.
 
 European surface ozone in the extreme summer 2003
-:raw-latex:`\citep{SolbergEA2008}`.
+:raw-latex:`SolbergEA2008`.
 
 Evaluation of the chemical transport model Oslo CTM2 with focus on
-Arctic winter ozone depletion :raw-latex:`\citep{SovdeEA2008}`.
+Arctic winter ozone depletion :cite:`SovdeEA2008`.
 
 2007 – 10 papers
 ----------------
 
 Sulphate trends in Europe: are we able to model the recent observed
-decrease? :raw-latex:`\citep{BerglenEA2007}`.
+decrease? :cite:`BerglenEA2007`.
 
 Environmental impacts of the expected increase in sea transportation,
 with a particular focus on oil and gas scenarios for Norway and
-Northwest Russia :raw-latex:`\citep{DalsorenEA2007}`.
+Northwest Russia :cite:`DalsorenEA2007`.
 
 Changes in Nitrogen Dioxide and Ozone over Southeast and East Asia
 between Year 2000 and 2030 with Fixed Meteorology
-:raw-latex:`\citep{GaussEA2007}`.
+:cite:`GaussEA2007`.
 
 Climate impact of supersonic air traffic: An approach to optimize a
 potential future supersonic fleet - Results from the EU-project SCENIC
-:raw-latex:`\citep{GreweEA2007}`.
+:cite:`GreweEA2007`.
 
 Secondary organic aerosol in the global aerosol - chemical transport
-model Oslo CTM2 :raw-latex:`\citep{HoyleEA2007}`.
+model Oslo CTM2 :cite:`HoyleEA2007`.
 
 A Study of Tropospheric Ozone over China with a 3-D Global CTM Model
-:raw-latex:`\citep{LiuEA2007}`.
+:cite:`LiuEA2007`.
 
 Comparison of the radiative properties and direct radiative effect of
 aerosols from a global aerosol model and remote sensing data over ocean
-:raw-latex:`\citep{MyhreEA2007b}`.
+:cite:`MyhreEA2007b`.
 
 Aerosol-cloud interaction inferred from MODIS satellite data and global
-aerosol models :raw-latex:`\citep{MyhreEA2007c}`.
+aerosol models :cite:`MyhreEA2007c`.
 
-Aircraft pollution: A futuristic view :raw-latex:`\citep{SovdeEA2007}`.
+Aircraft pollution: A futuristic view :cite:`SovdeEA2007`.
 
 The effect of harmonized emissions on aerosol properties in global
-models - an AeroCom experiment :raw-latex:`\citep{TextorEA2007}`.
+models - an AeroCom experiment :cite:`TextorEA2007`.
 
 2006 – 13 papers
 ----------------
 
 Abatement of Greenhouse Gases: Does Location Matter?
-:raw-latex:`\citep{BerntsenEA2006}`.
+:cite:`BerntsenEA2006`.
 
 CTM study of changes in tropospheric hydroxyl distribution 1990-2001 and
-its impact on methane :raw-latex:`\citep{DalsorenIsaksen2006}`.
+its impact on methane :cite:`DalsorenIsaksen2006`.
 
 Nitrogen and sulfur deposition on regional and global scales: A
-multimodel evaluation :raw-latex:`\citep{DentenerEA2006b}`.
+multimodel evaluation :cite:`DentenerEA2006b`.
 
 The Global Atmospheric Environment for the Next Generation
-:raw-latex:`\citep{DentenerEA2006a}`.
+:cite:`DentenerEA2006a`.
 
 Impact of aircraft NOx emissions on the atmosphere - tradeoffs to reduce
-the impact :raw-latex:`\citep{GaussEA2006}`.
+the impact :cite:`GaussEA2006`.
 
 Radiative forcing since preindustrial times due to ozone change in the
 troposphere and the lower stratosphere
-:raw-latex:`\citep{GaussEA2006b}`.
+:cite:`GaussEA2006b`.
 
 An AeroCom initial assessment - optical properties in aerosol component
-modules of global models :raw-latex:`\citep{KinneEA2006}`.
+modules of global models :cite:`KinneEA2006`.
 
 Modelling of nitrate and ammonium-containing aerosols in presence of sea
-salt :raw-latex:`\citep{MyhreEA2006a}`.
+salt :cite:`MyhreEA2006a`.
 
 Multi-model ensemble simulations of tropospheric NO2 compared with GOME
-retrievals for the year 2000 :raw-latex:`\citep{vanNoijeEA2006}`.
+retrievals for the year 2000 :cite:`vanNoijeEA2006`.
 
 Radiative forcing by aerosols as derived from the AeroCom present-day
-and pre-industrial simulations :raw-latex:`\citep{SchulzEA2006}`.
+and pre-industrial simulations :cite:`SchulzEA2006`.
 
 Multimodel simulations of carbon monoxide: Comparison with observations
-and projected near-future changes :raw-latex:`\citep{ShindellEA2006}`.
+and projected near-future changes :cite:`ShindellEA2006`.
 
 Multimodel ensemble simulations of present-day and near-future
-tropospheric ozone :raw-latex:`\citep{StevensonEA2006}`.
+tropospheric ozone :cite:`StevensonEA2006`.
 
 Analysis and quantification of the diversities of aerosol life cycles
-within AeroCom :raw-latex:`\citep{TextorEA2006}`.
+within AeroCom :cite:`TextorEA2006`.
 
 2005 – 5 papers
 ---------------
 
 Response of climate to regional emissions of ozone precursors:
 sensitivities and warming potentials
-:raw-latex:`\citep{BerntsenEA2005}`.
+:cite:`BerntsenEA2005`.
 
 An evaluation of the performance of chemistry transport models - Part 2:
 Detailed comparison with two selected campaigns
-:raw-latex:`\citep{BrunnerEA2005}`.
+:cite:`BrunnerEA2005`.
 
 Model simulations of dust sources and transport in the global
 atmosphere: Effects of soil erodibility and wind speed variability
-:raw-latex:`\citep{GriniEA2005}`.
+:cite:`GriniEA2005`.
 
 Tropospheric ozone changes at unpolluted and semipolluted regions
 induced by stratospheric ozone changes
-:raw-latex:`\citep{IsaksenEA2005}`.
+:cite:`IsaksenEA2005`.
 
 Radiative effect of surface albedo change from biomass burning
-:raw-latex:`\citep{MyhreEA2005}`.
+:cite:`MyhreEA2005`.
 
 2004 – 4 papers
 ---------------
 
 A global model of the coupled sulfur/oxidant chemistry in the
-troposphere: The sulfur cycle :raw-latex:`\citep{BerglenEA2004}`.
+troposphere: The sulfur cycle :cite:`BerglenEA2004`.
 
 Roles of saltation, sandblasting, and wind speed variability on mineral
 dust aerosol size distribution during the Puerto Rican Dust Experiment
-(PRIDE) :raw-latex:`\citep{GriniZender2004}`.
+(PRIDE) :cite:`GriniZender2004`.
 
-NOx change over China and its influences :raw-latex:`\citep{LiuEA2004}`.
+NOx change over China and its influences :cite:`LiuEA2004`.
 
 Uncertainties in the Radiative Forcing Due to Sulfate Aerosols
-:raw-latex:`\citep{MyhreEA2004}`.
+:cite:`MyhreEA2004`.
 
 2003 – 10 papers
 ----------------
 
 An evaluation of the performance of chemistry transport models by
 comparison with research aircraft observations. Part 1: Concepts and
-overall model performance :raw-latex:`\citep{BrunnerEA2003}`.
+overall model performance :cite:`BrunnerEA2003`.
 
 Emission from international sea transportation and environmental impact
-:raw-latex:`\citep{EndresenEA2003}`.
+:cite:`EndresenEA2003`.
 
 Impact of H2O emissions from cryoplanes and kerosene aircraft on the
-atmosphere :raw-latex:`\citep{GaussEA2003a}`.
+atmosphere :cite:`GaussEA2003a`.
 
 Radiative forcing in the 21st century due to ozone changes in the
 troposphere and the lower stratosphere
-:raw-latex:`\citep{GaussEA2003c}`.
+:cite:`GaussEA2003c`.
 
 Impact of aircraft NOx emission on NOx and ozone over China
-:raw-latex:`\citep{LiuEA2003a}`.
+:cite:`LiuEA2003a`.
 
 The possible influences of the increasing anthropogenic emissions in
-India on tropospheric ozone and OH :raw-latex:`\citep{LiuEA2003b}`.
+India on tropospheric ozone and OH :cite:`LiuEA2003b`.
 
 Modeling the radiative impact of mineral dust during the Saharan Dust
-Experiment (SHADE) campaign :raw-latex:`\citep{MyhreEA2003b}`.
+Experiment (SHADE) campaign :cite:`MyhreEA2003b`.
 
 Modeling the solar radiative impact of aerosols from biomass burning
 during the Southern African Regional Science Initiative (SAFARI-2000)
-experiment :raw-latex:`\citep{MyhreEA2003a}`.
+experiment :cite:`MyhreEA2003a`.
 
-Fresh air in the 21st century? :raw-latex:`\citep{PratherEA2003}`.
+Fresh air in the 21st century? :cite:`PratherEA2003`.
 
 Chemical transport model ozone simulations for spring 2001 over the
 western Pacific: Comparisons with TRACE-P lidar, ozonesondes, and Total
-Ozone Mapping Spectrometer columns :raw-latex:`\citep{WildEA2003}`.
+Ozone Mapping Spectrometer columns :cite:`WildEA2003`.
 
 2002 – 4 papers
 ---------------
 
 Modeling the Annual Cycle of Sea Salt in the Global 3D Model Oslo CTM2:
 Concentrations, Fluxes, and Radiative Impact
-:raw-latex:`\citep{GriniEA2002}`.
+:cite:`GriniEA2002`.
 
 Impacts of NOx emissions from subsonic aircraft in a global
 three-dimensional chemistry transport model including plume processes
-:raw-latex:`\citep{KraabolEA2002}`.
+:cite:`KraabolEA2002`.
 
 Model intercomparison of the transport of aircraft-like emissions from
-sub- and supersonic aircraft :raw-latex:`\citep{RogersEA2002}`.
+sub- and supersonic aircraft :cite:`RogersEA2002`.
 
 Photochemical Activity and Solar Ultraviolet Radiation (PAUR) Modulation
-Factors: An overview of the project :raw-latex:`\citep{ZerefosEA2002}`.
+Factors: An overview of the project :cite:`ZerefosEA2002`.
 
 2001 – 4 papers
 ---------------
 
 Atmospheric degradation and global warming potentials of three
-perfluoroalkenes :raw-latex:`\citep{AcerboniEA2001}`.
+perfluoroalkenes :cite:`AcerboniEA2001`.
 
 Chemistry-transport model comparison with ozone observations in the
-midlatitude lowermost stratosphere :raw-latex:`\citep{BregmanEA2001}`.
+midlatitude lowermost stratosphere :cite:`BregmanEA2001`.
 
 Model calculations of present and future levels of ozone and ozone
 precursors with a global and a regional model
-:raw-latex:`\citep{JonsonEA2001}`.
+:cite:`JonsonEA2001`.
 
 Sulphate particles from subsonic aviation: impact on upper tropospheric
-and lower stratospheric ozone :raw-latex:`\citep{PitariEA2001}`.
+and lower stratospheric ozone :cite:`PitariEA2001`.
 
 Oslo CTM1 – 12 papers
 ---------------------
 
 NOx Emissions from Aircraft: Its Impact on the Global Distribution of
-CH4 and O3 and on Radiative Forcing :raw-latex:`\citep{IsaksenEA2001}`.
+CH4 and O3 and on Radiative Forcing :cite:`IsaksenEA2001`.
 
 Time evolution of tropospheric ozone and its radiative forcing
-:raw-latex:`\citep{BerntsenEA2000}`.
+:cite:`BerntsenEA2000`.
 
 Trend analysis of O3 and CO in the period 1980-1996: A three-dimensional
-model study :raw-latex:`\citep{KarlsdottirEA2000}`.
+model study :cite:`KarlsdottirEA2000`.
 
 Radiative forcing due to changes in tropospheric ozone in the period
-1980 to 1996 :raw-latex:`\citep{MyhreEA2000}`.
+1980 to 1996 :cite:`MyhreEA2000`.
 
 Effects of lightning and convection on changes in tropospheric ozone due
-to NOx emissions from aircraft :raw-latex:`\citep{BerntsenEA1999}`.
+to NOx emissions from aircraft :cite:`BerntsenEA1999`.
 
 Influence of Asian emissions on the composition of air reaching the
-north western United States :raw-latex:`\citep{BerntsenEA1999}`.
+north western United States :cite:`BerntsenEA1999`.
 
 3-D global simulations of tropospheric CO distributions: Results of the
 GIM/IGAC intercomparison 1997 exercise
-:raw-latex:`\citep{KanakidouEA1999}`.
+:cite:`KanakidouEA1999`.
 
 Estimation of the direct radiative forcing due to sulfate and soot
-aerosols :raw-latex:`\citep{MyhreEA1998}`.
+aerosols :cite:`MyhreEA1998`.
 
 Global distribution of sulphate in the troposphere: A three-dimensional
-model study :raw-latex:`\citep{RestadEA1998}`.
+model study :cite:`RestadEA1998`.
 
 Effects of anthropogenic emissions on tropospheric ozone and its
-radiative forcing :raw-latex:`\citep{BerntsenEA1997}`.
+radiative forcing :cite:`BerntsenEA1997`.
 
 A global three-dimensional chemical transport model: 2. Nitrogen oxides
-and nonmethane hydrocarbon results :raw-latex:`\citep{JaffeEA1997}`.
+and nonmethane hydrocarbon results :cite:`JaffeEA1997`.
 
 A global three-dimensional chemical transport model for the troposphere:
 1. Model description and CO and Ozone results
-:raw-latex:`\citep{BerntsenIsaksen1997}`.
+:cite:`BerntsenIsaksen1997`.
 
 Contact information
 ===================
