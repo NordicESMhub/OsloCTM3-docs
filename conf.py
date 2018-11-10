@@ -130,7 +130,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'OsloCTM3.tex', 'OsloCTM3 Documentation',
-     'Amund Søvde Haslerud, Stefanie Falk and Anne Fouilloux', 'manual'),
+     'Amund Sovde Haslerud, Stefanie Falk and Anne Fouilloux', 'manual'),
 ]
 
 
