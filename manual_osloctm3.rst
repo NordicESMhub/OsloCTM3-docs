@@ -3536,7 +3536,7 @@ land-type :math:`N` as
 .. math:: R_{inc}(N) = b\,SAI(N)\frac{h(N)}{u_*}
 
  where :math:`h(N)` is the canopy height and
-:math:`b=14`\ s\ :math:`^{-1}` is an empirical constant. The in-canopy
+:math:`b=14`\ m\ :math:`^{-1}` is an empirical constant. The in-canopy
 resistance is not affected by temperature or snow in EMEP2012, and is of
 course zero for non-vegetated surfaces.
 
