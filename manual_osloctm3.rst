@@ -3126,6 +3126,7 @@ Section [sxn:drydep\_uci].
 
 The new dry deposition scheme
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+IMPORTANT: This section is not up-to-date! Publication is still pending (Aug 2019).
 
 The dry deposition parameterisation is in the process of being updated
 to follow the method of the EMEP model
